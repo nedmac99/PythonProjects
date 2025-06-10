@@ -1,3 +1,0 @@
-class Concentrators:
-    def __init__(self, ):
-        ...
