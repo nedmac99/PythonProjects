@@ -1,3 +1,5 @@
+import sys
+
 class Concentrator:
     def __init__(self, model, rma, revenue, flow_rate, is_repaired):
         self._model = model
@@ -5,8 +7,7 @@ class Concentrator:
         self._revenue = float(revenue.strip("$"))
         self._flow_rate = flow_rate
         self._is_repaired = is_repaired
-        
-        
+            
     @property
     def is_repaired(self):
         return self._is_repaired
@@ -16,7 +17,7 @@ class Concentrator:
         self._is_repaired = value
     
     def get_info(self):
-        return f"Model: {self._model} - RMA: {self._rma} | Revenue: {self._revenue} | Flow Rate: {self._flow_rate} | Repaired: {self._is_repaired}"
+        return f"Model: {self._model} - RMA: {self._rma} | Revenue: ${self._revenue} | Flow Rate: {self._flow_rate}L | Repaired: {self._is_repaired}"
         
     def __str__(self):
         return self.get_info()
@@ -73,35 +74,68 @@ class Inventory:
     
 
 def main():
-    type = input("Enter type: \n1.Home\n2.Portable\n3.Pediatric\n")
-    
-    if type == "1":
-        model = input("Enter Model type: ")
-        rma = input("Enter RMA: ")
-        revenue = input("Enter revenue amount: ")
-        flow_rate = input("Enter Flow Rate in liters: ")
-        is_repaired = input("Is the unit repaired(y/n): ")
-        noise_level = input("Enter noise level in dB: ")
-        unit = HomeConcentrator(model, rma, revenue, flow_rate, is_repaired, noise_level)
-        ######Continue Here#####
+    keep_receiving = True
+    inv = Inventory()
+    while keep_receiving:
+        type = input("Enter type: \n1.Home\n2.Portable\n3.Pediatric\n4.Exit\n")
         
-    elif type == "2":
-        model = input("Enter Model type: ")
-        rma = input("Enter RMA: ")
-        revenue = input("Enter revenue amount: ")
-        flow_rate = input("Enter Flow Rate in liters: ")
+        if type == "1":
+            model, rma, revenue, flow_rate, is_repaired = receive()  
+            noise_level = input("Enter noise level in dB: ")
+            unit = HomeConcentrator(model, rma, revenue, flow_rate, is_repaired, noise_level)
+            inv.receive_unit(unit)
+            print(f"\n{inv.show_stock()}\n")
+
+        elif type == "2":
+            model, rma, revenue, flow_rate, is_repaired = receive()
+            battery_level = input("Enter battery level: ")
+            unit = PortableConcentrator(model, rma, revenue, flow_rate, is_repaired, battery_level)
+            inv.receive_unit(unit)
+            print(f"\n{inv.show_stock()}\n")
+
+        elif type == "3":
+            model, rma, revenue, flow_rate, is_repaired = receive()
+            age = input("Enter patients age: ")
+            unit = PediatricConcentrator(model, rma, revenue, flow_rate, is_repaired, age)
+            inv.receive_unit(unit)
+            print(f"\n{inv.show_stock()}\n")
+        
+        elif type == "4":
+            #break
+            sys.exit("-------------------------------------------------------\nThank you for using my O2 Inventory management system!\n-------------------------------------------------------")
+
+        else:
+            print("Invalid Input")
+
+        
+def receive():
+    model = input("Enter Model type: ")
+    rma = input("Enter RMA: ")
+    revenue = input("Enter revenue amount: ")
+    flow_rate = input("Enter Flow Rate in liters: ")
+    repaired = True
+    while repaired:
         is_repaired = input("Is the unit repaired(y/n): ")
-    elif type == "3":
-        model = input("Enter Model type: ")
-        rma = input("Enter RMA: ")
-        revenue = input("Enter revenue amount: ")
-        flow_rate = input("Enter Flow Rate in liters: ")
-        is_repaired = input("Is the unit repaired(y/n): ")
-    else:
-        print("Invalid Input")
-    
+        if is_repaired == "y":
+            is_repaired = "Yes"
+            repaired = False
+        elif is_repaired == "n":
+            is_repaired = "No"
+            repaired = False
+        else:
+            print("Incorrect input")
+
+    return model, rma, revenue, flow_rate, is_repaired
+            
+
     
     
     
 if __name__ == "__main__":
     main()
+
+
+#Objectives
+'''
+-Check whiteboard photo for next objective(add an outer menu to select what to do with the inventory before just starting to receive)
+'''
