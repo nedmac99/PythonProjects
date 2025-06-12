@@ -1,6 +1,5 @@
 import sys
 
-
 class Concentrator:
     def __init__(self, model, rma, revenue, flow_rate, is_repaired):
         self._model = model
@@ -196,5 +195,6 @@ if __name__ == "__main__":
 
 # Objectives
 """
--...
+-Add warranty type to Concentrator class, child classes, and define warranty check function inside Inventory class
+-Create warranty check selection in main menu
 """
