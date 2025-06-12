@@ -26,7 +26,7 @@ class Concentrator:
 class HomeConcentrator(Concentrator):
     def __init__(self, model, rma, revenue, flow_rate, is_repaired, noise_level):
         super().__init__(model, rma, revenue, flow_rate, is_repaired)
-        self._noise_level = noise_level
+        self._noise_level = float(noise_level)
         
     def get_info(self):
         return super().get_info() + f" | Noise level: {self._noise_level} dB"
@@ -52,16 +52,20 @@ class Inventory:
         self._stock = []
     
     def receive_unit(self, unit):
-        self._stock.append(unit)
+        if any(u._rma == unit._rma for u in self._stock):
+            print(f"\nRMA {unit._rma} already exists! Unit not added.\n")
+        else:
+            self._stock.append(unit)
         
     def ship_unit(self, unit):
         if unit in self._stock:
             self._stock.remove(unit)
         else:
-            print("Unit not found!")
+            print("\nUnit not found!\n")
             
-    def check_repair_status(self, unit):
-        return unit._is_repaired
+    def check_repair_status(self, rma):
+        unit = next((u for u in self._stock if u._rma == rma), None)
+        return unit._is_repaired if unit else None
         
     def show_stock(self):
         if not self._stock:
@@ -74,35 +78,61 @@ class Inventory:
     
 
 def main():
-    keep_receiving = True
     inv = Inventory()
+    while True:
+        selection = input("Enter selection: \n1.Receive unit\n2.Ship unit\n3.Check repair status\n4.View inventory\n5.Show revenue\n6.Exit\n")
+        if selection == "1":
+            receiving(inv)
+        elif selection == "2":
+            shipping(inv)
+        elif selection == "3":
+            rma = input("Enter RMA to check repair status: ").strip().upper()
+            status = inv.check_repair_status(rma)
+            if status is not None:
+                print(f"Repair status: {status}")
+            else:
+                print("\nUnit not found!\n")
+        elif selection == "4":
+            print(f"\n{inv.show_stock()}\n")
+        elif selection == "5":
+            print(f"\n{inv.show_revenue()}\n")
+        elif selection == "6":
+            sys.exit("-------------------------------------------------------\nThank you for using my O2 Inventory management system!\n-------------------------------------------------------")
+        else:
+            print("Invalid input!")
+
+            
+
+
+
+def receiving(inv):
+    keep_receiving = True
     while keep_receiving:
-        type = input("Enter type: \n1.Home\n2.Portable\n3.Pediatric\n4.Exit\n")
+        type = input("Enter type of unit to receive: \n1.Home\n2.Portable\n3.Pediatric\n4.Exit\n")
         
         if type == "1":
             model, rma, revenue, flow_rate, is_repaired = receive()  
             noise_level = input("Enter noise level in dB: ")
             unit = HomeConcentrator(model, rma, revenue, flow_rate, is_repaired, noise_level)
             inv.receive_unit(unit)
-            print(f"\n{inv.show_stock()}\n")
+            print(f"\nUnit received\n")
 
         elif type == "2":
             model, rma, revenue, flow_rate, is_repaired = receive()
             battery_level = input("Enter battery level: ")
             unit = PortableConcentrator(model, rma, revenue, flow_rate, is_repaired, battery_level)
             inv.receive_unit(unit)
-            print(f"\n{inv.show_stock()}\n")
+            print(f"\nUnit received\n")
 
         elif type == "3":
             model, rma, revenue, flow_rate, is_repaired = receive()
             age = input("Enter patients age: ")
             unit = PediatricConcentrator(model, rma, revenue, flow_rate, is_repaired, age)
             inv.receive_unit(unit)
-            print(f"\n{inv.show_stock()}\n")
+            print(f"\nUnit received\n")
         
         elif type == "4":
-            #break
-            sys.exit("-------------------------------------------------------\nThank you for using my O2 Inventory management system!\n-------------------------------------------------------")
+            break
 
         else:
             print("Invalid Input")
@@ -110,12 +140,12 @@ def main():
         
 def receive():
     model = input("Enter Model type: ")
-    rma = input("Enter RMA: ")
+    rma = input("Enter RMA: ").strip().upper()
     revenue = input("Enter revenue amount: ")
-    flow_rate = input("Enter Flow Rate in liters: ")
+    flow_rate = float(input("Enter Flow Rate in liters: "))
     repaired = True
     while repaired:
-        is_repaired = input("Is the unit repaired(y/n): ")
+        is_repaired = input("Is the unit repaired(y/n): ").lower()
         if is_repaired == "y":
             is_repaired = "Yes"
             repaired = False
@@ -128,7 +158,24 @@ def receive():
     return model, rma, revenue, flow_rate, is_repaired
             
 
-    
+def shipping(inv):
+    keep_shipping = True
+    while keep_shipping:
+        if not inv._stock:
+            print("\nNo units available to ship.\n")
+            break
+        print("\nCurrent Inventory: \n")
+        print(f"\n{inv.show_stock()}\n")
+        rma = input("\nEnter RMA of unit to ship or c to cancel: \n").strip().upper()
+        if rma.lower() == "c":
+            break
+        unit = next((u for u in inv._stock if u._rma == rma), None)
+        if unit:
+            inv.ship_unit(unit)
+            print(f"\nUnit with RMA {rma} has been shipped!\n")
+        else:
+            print(f"\nUnit with RMA {rma} not found\n")
+           
     
     
 if __name__ == "__main__":
@@ -137,5 +184,5 @@ if __name__ == "__main__":
 
 #Objectives
 '''
--Check whiteboard photo for next objective(add an outer menu to select what to do with the inventory before just starting to receive)
+-...
 '''
