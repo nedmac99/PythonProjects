@@ -197,4 +197,5 @@ if __name__ == "__main__":
 """
 -Add warranty type to Concentrator class, child classes, and define warranty check function inside Inventory class
 -Create warranty check selection in main menu
+-Add csv to store units
 """
