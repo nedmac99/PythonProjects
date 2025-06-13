@@ -271,14 +271,14 @@ def calculate_revenue(model, warranty):
     return 0.00
         
 
-def save_units_to_csv(units, filename="C:\\Users\\Dwhite\\py_codes\\projects\\o2_inventory\\units.csv"):
+def save_units_to_csv(units, filename="C:\\Users\\Camde\\OneDrive\\Desktop\\PythonProjects\\o2_inventory\\units.csv"):
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file)
         for unit in units:
             writer.writerow([type(unit).__name__, unit._model, unit._rma, unit._warranty_type, unit._revenue, unit._flow_rate, unit._is_repaired,
                              getattr(unit, '_noise_level', ''), getattr(unit, '_battery_level', ''), getattr(unit, '_age', '')])
             
-def load_units_from_csv(filename="C:\\Users\\Dwhite\\py_codes\\projects\\o2_inventory\\units.csv"):
+def load_units_from_csv(filename="C:\\Users\\Camde\\OneDrive\\Desktop\\PythonProjects\\o2_inventory\\units.csv"):
     inventory = Inventory()
     try:
         with open(filename, mode='r') as file:
@@ -306,7 +306,6 @@ if __name__ == "__main__":
 
 # Objectives
 """
--Folder o2 code and units.csv together in github and vscode
 -Find and fix the format issue with csv in github and vscode(?)
--Change path to local path at home
+-Create condition so that pediatric units only have flow rate to 2
 """
