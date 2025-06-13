@@ -306,7 +306,7 @@ if __name__ == "__main__":
 
 # Objectives
 """
--Folder o2 code and units.csv together
--Find and fix the format issue with csv in github
+-Folder o2 code and units.csv together in github and vscode
+-Find and fix the format issue with csv in github and vscode(?)
 -Change path to local path at home
 """
