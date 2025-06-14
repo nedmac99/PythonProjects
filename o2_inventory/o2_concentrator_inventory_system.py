@@ -96,10 +96,13 @@ def main():
         selection = input(
             "Enter selection: \n1.Receive unit\n2.Ship unit\n3.Check repair status\n4.Check warranty type\n5.View inventory\n6.Show revenue\n7.Change repair status\n8.Exit\n"
         )
+
         if selection == "1":
             receiving(inv)
+
         elif selection == "2":
             shipping(inv)
+
         elif selection == "3":
             if not inv._stock:
                 print("No units in inventory")
@@ -110,6 +113,7 @@ def main():
                 print(f"Repair status: {status}")
             else:
                 print("\nUnit not found!\n")
+
         elif selection == "4":
             if not inv._stock:
                 print("No units in inventory")
@@ -117,10 +121,13 @@ def main():
             rma = input("Enter RMA to check warranty type: ").strip().upper()
             w_type = inv.check_warranty_type(rma)
             print(f"Warranty type: {w_type}")
+
         elif selection == "5":
             print(f"\n{inv.show_stock()}\n")
+
         elif selection == "6":
             print(f"\n{inv.show_revenue()}\n")
+
         elif selection == "7":
             if not inv._stock:
                 print("No units in inventory")
@@ -142,6 +149,7 @@ def main():
                         print("Invalid input. Please enter 'y' or 'n'.")
             else:
                 print("Unit not found.")
+
         elif selection == "8":
             save_units_to_csv(inv._stock)
             print("\nSaved!\n")
@@ -202,15 +210,19 @@ def receive():
             if warranty_code in ["m", "q"]:
                 print("Invalid warranty type for P2")
                 continue
+
         if warranty_code == "m":
             warranty_type = "Manufacture Warranty"
             break
+
         elif warranty_code == "f":
             warranty_type = "Flat rate"
             break
+
         elif warranty_code == "q":
             warranty_type = "QM Warranty"
             break
+
         else:
             print("Invalid input")
             
@@ -223,9 +235,11 @@ def receive():
         if is_repaired == "y":
             is_repaired = "Completed"
             break
+
         elif is_repaired == "n":
             is_repaired = "Not completed"
             break
+
         else:
             print("Incorrect input")
 
@@ -240,12 +254,15 @@ def shipping(inv):
         print("\nCurrent Inventory: \n")
         print(f"\n{inv.show_stock()}\n")
         rma = input("\nEnter RMA of unit to ship or c to cancel: \n").strip().upper()
+
         if rma.lower() == "c":
             break
         unit = next((u for u in inv._stock if u._rma == rma), None)
+
         if unit:
             inv.ship_unit(unit)
             print(f"\nUnit with RMA {rma} has been shipped!\n")
+
         else:
             print(f"\nUnit with RMA {rma} not found\n")
 
@@ -259,6 +276,7 @@ def calculate_revenue(model, warranty):
             return 45.00
         elif model == "1025DD":
             return 75.00
+        
     elif warranty == "f":
         if model in ["525DD", "525DDP"]:
             return 299.98
@@ -266,8 +284,10 @@ def calculate_revenue(model, warranty):
             return 375.98
         elif model == "P2":
             return 298.98
+        
     elif warranty == "q":
         return 0.00
+    
     return 0.00
         
 
@@ -275,8 +295,7 @@ def save_units_to_csv(units, filename="C:\\Users\\Camde\\OneDrive\\Desktop\\Pyth
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file)
         for unit in units:
-            writer.writerow([type(unit).__name__, unit._model, unit._rma, unit._warranty_type, unit._revenue, unit._flow_rate, unit._is_repaired,
-                             getattr(unit, '_noise_level', ''), getattr(unit, '_battery_level', ''), getattr(unit, '_age', '')])
+            writer.writerow([type(unit).__name__, unit._model, unit._rma, unit._warranty_type, unit._revenue, unit._flow_rate, unit._is_repaired, getattr(unit, '_noise_level', ''), getattr(unit, '_battery_level', ''), getattr(unit, '_age', '')])
             
 def load_units_from_csv(filename="C:\\Users\\Camde\\OneDrive\\Desktop\\PythonProjects\\o2_inventory\\units.csv"):
     inventory = Inventory()
