@@ -1,3 +1,4 @@
+Concentrator_type,Model,RMA,Warranty_type,Revenue,Flow_rate,Repair_staus,Noise_level,Battery_level,Age
 HomeConcentrator,525DD,QM12345,Flat rate,299.98,5.0,Not completed,78.0,,
 PortableConcentrator,P2,QM54321,Flat rate,298.98,1.0,Not completed,,89,
 PediatricConcentrator,525DDP,QM6789,Flat rate,299.98,2.0,Completed,,,7
