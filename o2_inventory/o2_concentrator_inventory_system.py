@@ -167,7 +167,7 @@ def receiving(inv):
         )
 
         if type == "1":
-            model, rma, warranty_type, revenue, flow_rate, is_repaired = receive()
+            model, rma, warranty_type, revenue, flow_rate, is_repaired = receive("HomeConcentrator")
             noise_level = input("Enter noise level in dB: ")
             unit = HomeConcentrator(
                 model, rma, warranty_type, revenue, flow_rate, is_repaired, noise_level
@@ -176,7 +176,7 @@ def receiving(inv):
             print(f"\nUnit received\n")
 
         elif type == "2":
-            model, rma, warranty_type, revenue, flow_rate, is_repaired = receive()
+            model, rma, warranty_type, revenue, flow_rate, is_repaired = receive("PortableConcentrator")
             battery_level = input("Enter battery level: ")
             unit = PortableConcentrator(
                 model, rma, warranty_type, revenue, flow_rate, is_repaired, battery_level
@@ -185,7 +185,7 @@ def receiving(inv):
             print(f"\nUnit received\n")
 
         elif type == "3":
-            model, rma, warranty_type, revenue, flow_rate, is_repaired = receive()
+            model, rma, warranty_type, revenue, flow_rate, is_repaired = receive("PediatricConcentrator")
             age = input("Enter patients age: ")
             unit = PediatricConcentrator(
                 model, rma, warranty_type, revenue, flow_rate, is_repaired, age
@@ -200,7 +200,7 @@ def receiving(inv):
             print("Invalid Input")
 
 
-def receive():
+def receive(unit_type):
     model = input("Enter Model type: ").upper()
     rma = input("Enter RMA: ").strip().upper()
     
@@ -228,8 +228,18 @@ def receive():
             
     revenue = calculate_revenue(model, warranty_code)
     
-    flow_rate = float(input("Enter Flow Rate in liters: "))
-    
+    while True:
+        try:
+            flow_rate = float(input("Enter Flow Rate in liters: "))
+            if flow_rate < 0:
+                print("Cannot have negative flow rate. Please re-enter.")
+                continue
+            if unit_type == "PediatricConcentrator" and flow_rate > 2:
+                print("Flow rate for Pediatric units cannot exceed 2 liters. Please re-enter.")
+                continue
+            break  # Only break if all validations pass
+        except ValueError:
+            print("Invalid input. Please enter a numeric value for flow rate.")
     while True:
         is_repaired = input("Is the unit repaired(y/n): ").lower()
         if is_repaired == "y":
@@ -325,10 +335,3 @@ def load_units_from_csv(filename="C:\\Users\\Camde\\OneDrive\\Desktop\\PythonPro
 
 if __name__ == "__main__":
     main()
-
-# Objectives
-"""
--Find and fix the format issue with csv in github and vscode(?)
--Create condition so that pediatric units only have flow rate to 2
--Manually add column names to csv to see if it helps with the format. (Change how file write works to accomidate)
-"""
