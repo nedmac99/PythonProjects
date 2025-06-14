@@ -1,5 +1,8 @@
 import sys
 import csv
+from pathlib import Path
+
+file_path = Path(__file__).parent / "units.csv"
 
 class Concentrator:
     def __init__(self, model, rma, warranty_type, revenue, flow_rate, is_repaired):
@@ -301,7 +304,7 @@ def calculate_revenue(model, warranty):
     return 0.00
         
 
-def save_units_to_csv(units, filename="C:\\Users\\Camde\\OneDrive\\Desktop\\PythonProjects\\o2_inventory\\units.csv"):
+def save_units_to_csv(units, filename=file_path):
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["Concentrator_type", "Model", "RMA", "Warranty_type", "Revenue", "Flow_rate", "Repair_status", "Noise_level", "Battery_level", "Age"])
@@ -309,7 +312,7 @@ def save_units_to_csv(units, filename="C:\\Users\\Camde\\OneDrive\\Desktop\\Pyth
             writer.writerow([type(unit).__name__, unit._model, unit._rma, unit._warranty_type, unit._revenue, unit._flow_rate, unit._is_repaired, getattr(unit, '_noise_level', 'N/A'), getattr(unit, '_battery_level', 'N/A'), getattr(unit, '_age', 'N/A')])
 
             
-def load_units_from_csv(filename="C:\\Users\\Camde\\OneDrive\\Desktop\\PythonProjects\\o2_inventory\\units.csv"):
+def load_units_from_csv(filename=file_path):
     inventory = Inventory()
     try:
         with open(filename, mode='r') as file:
