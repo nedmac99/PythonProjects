@@ -272,13 +272,13 @@ def calculate_revenue(model, warranty):
     model = model.upper()
     warranty = warranty.lower()
     if warranty == "m":
-        if model in ["525DD", "525DDP"]:
+        if model in ["525DD", "525DDP", "EVERFLOW", "EVERFLOW Q"]:
             return 45.00
         elif model == "1025DD":
             return 75.00
         
     elif warranty == "f":
-        if model in ["525DD", "525DDP"]:
+        if model in ["525DD", "525DDP", "EVERFLOW", "EVERFLOW Q"]:
             return 299.98
         elif model == "1025DD":
             return 375.98
@@ -294,17 +294,20 @@ def calculate_revenue(model, warranty):
 def save_units_to_csv(units, filename="C:\\Users\\Camde\\OneDrive\\Desktop\\PythonProjects\\o2_inventory\\units.csv"):
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file)
+        writer.writerow(["Concentrator_type", "Model", "RMA", "Warranty_type", "Revenue", "Flow_rate", "Repair_status", "Noise_level", "Battery_level", "Age"])
         for unit in units:
-            writer.writerow([type(unit).__name__, unit._model, unit._rma, unit._warranty_type, unit._revenue, unit._flow_rate, unit._is_repaired, getattr(unit, '_noise_level', ''), getattr(unit, '_battery_level', ''), getattr(unit, '_age', '')])
+            writer.writerow([type(unit).__name__, unit._model, unit._rma, unit._warranty_type, unit._revenue, unit._flow_rate, unit._is_repaired, getattr(unit, '_noise_level', 'N/A'), getattr(unit, '_battery_level', 'N/A'), getattr(unit, '_age', 'N/A')])
+
             
 def load_units_from_csv(filename="C:\\Users\\Camde\\OneDrive\\Desktop\\PythonProjects\\o2_inventory\\units.csv"):
     inventory = Inventory()
     try:
         with open(filename, mode='r') as file:
             reader = csv.reader(file)
+            next(reader, None) 
             for row in reader:
                 unit_type, model, rma, warranty, revenue, flow_rate, repaired, noise, battery, age = row
-                flow_rate = float(flow_rate)
+                flow_rate = flow_rate
                 if unit_type == "HomeConcentrator":
                     unit = HomeConcentrator(model, rma, warranty, revenue, flow_rate, repaired, noise)
                 elif unit_type == "PortableConcentrator":
