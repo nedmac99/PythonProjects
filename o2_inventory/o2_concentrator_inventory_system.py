@@ -240,7 +240,7 @@ def receive(unit_type):
             if unit_type == "PediatricConcentrator" and flow_rate > 2:
                 print("Flow rate for Pediatric units cannot exceed 2 liters. Please re-enter.")
                 continue
-            break  # Only break if all validations pass
+            break
         except ValueError:
             print("Invalid input. Please enter a numeric value for flow rate.")
     while True:
