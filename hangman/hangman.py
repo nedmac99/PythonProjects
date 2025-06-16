@@ -1,11 +1,14 @@
 import sys
 import csv
 import random
+from path import pathlib
 
 easy_words_list = []
 medium_words_list = []
 hard_words_list = []
 scholar_words_list = []
+
+file_path = Path(__file__).parent / "words_for_hangman.csv"
 
 def main():
 
@@ -62,7 +65,7 @@ def main():
               
         
 def read_file_easy():
-    with open("C:\\Users\\Camde\\OneDrive\\Desktop\\projects\\hangman\\words_for_hangman.csv", "r") as file:
+    with open(file_path, "r") as file:
         reader = csv.DictReader(file)
         for line in reader:
             easy_words = line["easy"]
@@ -71,7 +74,7 @@ def read_file_easy():
         return easy_rand
     
 def read_file_medium():
-    with open("C:\\Users\\Camde\\OneDrive\\Desktop\\projects\\hangman\\words_for_hangman.csv", "r") as file:
+    with open(file_path, "r") as file:
         reader = csv.DictReader(file)
         for line in reader:
             medium_words = line["medium"]
@@ -80,7 +83,7 @@ def read_file_medium():
         return medium_rand
     
 def read_file_hard():
-    with open("C:\\Users\\Camde\\OneDrive\\Desktop\\projects\\hangman\\words_for_hangman.csv", "r") as file:
+    with open(file_path, "r") as file:
         reader = csv.DictReader(file)
         for line in reader:
             hard_words = line["hard"]
@@ -89,7 +92,7 @@ def read_file_hard():
         return hard_rand
     
 def read_file_scholar():
-    with open("C:\\Users\\Camde\\OneDrive\\Desktop\\projects\\hangman\\words_for_hangman.csv", "r") as file:
+    with open(file_path, "r") as file:
         reader = csv.DictReader(file)
         for line in reader:
             scholar_words = line["scholar"]
@@ -101,6 +104,3 @@ def read_file_scholar():
 if __name__ == "__main__":
     main()
     
-#Print entire list#
-#for words in easy_words_list:
-        #print(f"{words["easy"]}")
