@@ -43,8 +43,10 @@ This program is ideal for small teams that require a lightweight, easy-to-mainta
 ## 📁 File Structure
 
 - `o2_inventory.py` — Main program file with all logic.
-- `units.csv` — Auto-generated file storing inventory records.
 - `test_o2_inventory.py` — Test file to establish unit testing on functions within main o2 inventory program
+- `units.csv` — Auto-generated file storing inventory records.
+- `requirements.txt` — Text file that stores the pip-installable libraries needed for this program
+
 
 The CSV structure includes fields for unit type, model, RMA, warranty, revenue, flow rate, repair status, and optional fields depending on unit type.
 
