@@ -291,12 +291,10 @@ def calculate_revenue(model, warranty):
             return 75.00
         
     elif warranty == "f":
-        if model in ["525DD", "525DDP", "EVERFLOW", "EVERFLOW Q"]:
+        if model in ["525DD", "525DDP", "EVERFLOW", "EVERFLOW Q", "P2"]:
             return 299.98
         elif model == "1025DD":
             return 375.98
-        elif model == "P2":
-            return 298.98
         
     elif warranty == "q":
         return 0.00
