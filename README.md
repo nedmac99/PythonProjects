@@ -1,1 +1,1 @@
-#Consolidate mini projects into own folder
+# Consolidate mini projects into own folder
