@@ -13,37 +13,47 @@ from pathlib import Path
 -Handle missing values
 '''
 
+'''Load Data set'''
+
+#Finds the file we want to use
 file_path = Path(__file__).parent / "Sample - Superstore.csv"
 
+#Loads database into variable called df(DataFrame)
+df = pd.read_csv(file_path, encoding='ISO-8859-1')
 
-df = pd.read_csv(file_path,encoding='ISO-8859-1')
+#Information about DataFrame
+print(df.info())
 
-#Details about dataframe
-print(df.info()) 
-#Preview Data
-print(df.head(10))
+#Preview the top 5 entries
+print(df.head())
 
-new_df = df.dropna()
+'''Cleaning up the data'''
 
-print(new_df.head(10))
+#Strip whitespaces from column names
+df.columns = df.columns.str.strip()
 
+#Check for missing values
+print(f"Check for missing values: \n{df.isnull().sum()}")
 
+#Drop missing values
+df.dropna(inplace=True)
 
+#Drop Duplicates
+df.drop_duplicates(inplace=True)
 
-
-
-
-
-#Example code
-
-'''
+#Convert dates to datetime
 df['Order Date'] = pd.to_datetime(df['Order Date'])
-# Monthly sales trends
-monthly_sales = df.groupby(pd.Grouper(key='Order Date', freq='M'))['Sales'].sum()
+df['Ship Date'] = pd.to_datetime(df['Ship Date'])
 
-# Top 5 products
-top_products = df.groupby('Product Name')['Sales'].sum().sort_values(ascending=False).head(5)
+'''Group sales by Product and Date'''
 
-print("Monthly Sales:\n", monthly_sales)
-print("\nTop 5 Products:\n", top_products)
-'''
+#Group by product and order date
+grouped = df.groupby(['Product Name', 'Order Date'])['Sales'].sum().reset_index()
+print(grouped.head())
+
+#Group by the Month by adding a 'Month' column
+df['Month'] = df['Order Date'].dt.to_period('M')
+
+'''Create New Features'''
+
+#Continue from Chatgpt
