@@ -1,2 +1,3 @@
-# To do:
-## Consolidate mini projects into own folder
+# Python Projects
+
+## These are python projects to practice key concepts for data science
