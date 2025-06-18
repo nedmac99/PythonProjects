@@ -16,7 +16,7 @@ from pathlib import Path
 '''Load Data set'''
 
 #Finds the file we want to use
-file_path = Path(__file__).parent / "Sample - Superstore.csv"
+file_path = Path(__file__).parent / "Superstore.csv"
 
 #Loads database into variable called df(DataFrame)
 df = pd.read_csv(file_path, encoding='ISO-8859-1')
