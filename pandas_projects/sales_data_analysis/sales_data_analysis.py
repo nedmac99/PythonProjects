@@ -3,7 +3,7 @@ import kagglehub
 from kagglehub import KaggleDatasetAdapter
 from pathlib import Path
 
-#Objective
+#Objectives
 '''
 -Analyze sales data to uncover trends, top-selling products, monthly revenue, and customer behavior.✅
 -Load and clean the dataset✅
