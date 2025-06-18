@@ -5,12 +5,12 @@ from pathlib import Path
 
 #Objective
 '''
--Analyze sales data to uncover trends, top-selling products, monthly revenue, and customer behavior.
--Load and clean the dataset
--Group sales by product and date
--Create new features like Total = Quantity * Price
--Filter top customers or products
--Handle missing values
+-Analyze sales data to uncover trends, top-selling products, monthly revenue, and customer behavior.✅
+-Load and clean the dataset✅
+-Group sales by product and date✅
+-Create new features like Total = Quantity * Price✅
+-Filter top customers or products✅
+-Handle missing values✅
 '''
 
 '''Load Data set'''
@@ -56,4 +56,16 @@ df['Month'] = df['Order Date'].dt.to_period('M')
 
 '''Create New Features'''
 
-#Continue from Chatgpt
+#Create new column 'Total'
+df['Total'] = df['Sales']
+
+'''Grouping and Aggregation'''
+
+#Group data by the product and month, then sum the sales
+monthly_sales = df.groupby(['Product Name', 'Month'])['Sales'].sum().reset_index()
+
+#Group data by the product name, sum the quantity sold, sort it in descending order, and finds the top 10 selling products
+top_products = df.groupby('Product Name')['Quantity'].sum().sort_values(ascending=False).head(10)
+
+#Group the data by customer, totals the sales per customer, Sort it in descending order, returns top 10 customers by revenue
+top_customers = df.groupby('Customer Name')['Sales'].sum().sort_values(ascending=False).head(10)
