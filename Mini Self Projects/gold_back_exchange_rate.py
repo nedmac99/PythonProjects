@@ -1,0 +1,1 @@
+#Use https://www.goldback.com/exchange-rates/ to find the current exchange rate
