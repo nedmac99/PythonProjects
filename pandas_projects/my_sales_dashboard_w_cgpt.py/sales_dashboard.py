@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 from pathlib import Path
 
 
@@ -67,6 +68,7 @@ df = pd.read_csv(file_path, encoding='ISO-8859-1')
 
 #Deeper Insights and KPI's(Key performance indicators)
 
+'''
 #Find the top 10 products by total sales
 #print(df.groupby(['Product Name'])['Sales'].sum().sort_values(ascending=False).head(10))
 
@@ -81,4 +83,34 @@ df = pd.read_csv(file_path, encoding='ISO-8859-1')
 
 #Find if there are bigger discounts on high-selling products
 #print(df.groupby(['Product Name'])[['Sales', 'Discount']].mean())
+'''
 
+#Visualizations
+'''
+#Create  line chart to reveal trends of Order Month and sales
+#df['Order Date'] = pd.to_datetime(df['Order Date'])
+#df['Order Month'] = df['Order Date'].dt.to_period('M')
+#df.groupby(['Order Month'])['Sales'].sum().plot(kind='line')
+#plt.show()
+
+#Create a bar chart for total sales and category
+#df.groupby(['Category'])['Sales'].sum().plot(kind='bar')
+#plt.show()
+
+#Create horizontal bar chart to show profit by sub-category
+#df.groupby(['Sub-Category'])['Profit'].sum().plot(kind='barh')
+#plt.show()
+
+#Compare total sales across regions using stacked bar chart
+#df.groupby(['Region', 'Category'])['Sales'].sum().unstack().plot(kind='bar', stacked=True)
+#plt.show()
+
+#Find the distribution of sales values across different product categories using a blox plot
+#df.boxplot(column='Sales', by='Category')
+#plt.show()
+
+#Create a heatmap that visualizes the correlation between numeric columns(like Sales, Profit, Discount, etc)
+#numeric_df = df.select_dtypes(include='number')
+#sns.heatmap(numeric_df.corr(), annot=True, cmap='coolwarm')
+#plt.show()
+'''
