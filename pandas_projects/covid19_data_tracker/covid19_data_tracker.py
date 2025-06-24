@@ -74,4 +74,50 @@ df['RecoveryRate'] = (df['TotalRecovered']) / (df['TotalCases'])
 
 #Reshape data so that first 4 columns('Province/State', 'Country/Region', 'Lat', 'Long') stay fixed and all the remaining date columns become rows with one column for Date and one column for Confirmed cases
 df2_melted = pd.melt(df2, id_vars=['Province/State', 'Country/Region', 'Lat', 'Long'], var_name='Date', value_name='Confirmed')
-print(df2_melted.head(10000))
+
+#Convert 'Date' to a datetime type for future filtering and analysis
+df2_melted['Date'] = pd.to_datetime(df2_melted['Date'], format='%m/%d/%y')
+
+#Find how the virus spread over time globally. Group by date and sum the confimed cases. Prints the first 20 dates
+#print(df2_melted.groupby(['Date'])['Confirmed'].sum().head(20))
+
+#Visualize the trend with a line graph
+#df2_melted.groupby(['Date'])['Confirmed'].sum().head(10000).plot(kind='line')
+#plt.show()
+
+#Filter to only include rows from Italy
+#df2_melted[df2_melted['Country/Region'] == 'Italy'].groupby(['Date'])['Confirmed'].sum().head(100).plot(kind='line')
+#plt.show()
+
+#Filter df2_melted to include only rows where Country/Region are in the list of 'Italy', 'USA', 'Brazil', 'India', 'China'
+#print(df2_melted[df2_melted['Country/Region'].isin(['Italy', 'USA', 'Brazil', 'India', 'China'])].head(15))
+
+#Group and plot the previous statement
+#df2_melted[df2_melted['Country/Region'].isin(['Italy', 'USA', 'Brazil', 'India', 'China'])].groupby(['Date', 'Country/Region'])['Confirmed'].sum().unstack().plot(kind='line', stacked=True)
+#plt.show()
+
+#Convert from cumulative totals to daily new totals by calculating the difference between each row and the previous row and plot it using line graph
+#df2_melted[df2_melted['Country/Region'].isin(['Italy', 'USA', 'Brazil', 'India', 'China'])].groupby(['Date', 'Country/Region'])['Confirmed'].sum().unstack().diff().plot(kind='line')
+#plt.show()
+
+#Smoothen the line of the graph in the last line using rolling to collect the average over a 7 day window
+#df2_melted[df2_melted['Country/Region'].isin(['Italy', 'USA', 'Brazil', 'India', 'China'])].groupby(['Date', 'Country/Region'])['Confirmed'].sum().unstack().diff().rolling(window=7).mean().plot(kind='line')
+#plt.show()
+
+#Analyze Per Capita Daily Cases by normalizing daily new cases by population, so we can fairly compare countries of different sizes
+#daily_cases = df2_melted[df2_melted['Country/Region'].isin(['Italy', 'USA', 'Brazil', 'India', 'China'])].groupby(['Date', 'Country/Region'])['Confirmed'].sum().unstack().diff()
+#population = df.set_index('Country/Region')['Population']
+#daily_per_million = (daily_cases / population) * 1000000
+
+#Plot the previous line using a smooth line with rolling()
+#daily_per_million.rolling(window=7).mean().plot(kind='line')
+#plt.show()
+
+#Reshape data from df3 using melt to have a long format vs wide format. Add Column for date with values equivalent to deaths
+df3_melted = pd.melt(df3, id_vars=['Province/State', 'Country/Region', 'Lat', 'Long'], var_name='Date', value_name='Deaths')
+print(df3_melted)
+
+#Convert date to datetime type
+df3_melted['Date'] = pd.to_datetime(df3_melted['Date'], format='%m/%d/%y')
+
+#
