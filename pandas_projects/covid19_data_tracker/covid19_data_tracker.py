@@ -115,7 +115,7 @@ df2_melted['Date'] = pd.to_datetime(df2_melted['Date'], format='%m/%d/%y')
 
 #Reshape data from df3 using melt to have a long format vs wide format. Add Column for date with values equivalent to deaths
 df3_melted = pd.melt(df3, id_vars=['Province/State', 'Country/Region', 'Lat', 'Long'], var_name='Date', value_name='Deaths')
-print(df3_melted)
+#print(df3_melted)
 
 #Convert date to datetime type
 df3_melted['Date'] = pd.to_datetime(df3_melted['Date'], format='%m/%d/%y')
