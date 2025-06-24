@@ -68,4 +68,10 @@ df['RecoveryRate'] = (df['TotalRecovered']) / (df['TotalCases'])
 #df.sort_values('DeathRate', ascending=False).head(10).plot(kind='bar', x='Country/Region', y='DeathRate')
 #plt.show()
 
-#Time-Series Analysis
+#Time-Series Analysis for confirmed cases
+#df2.info()
+#print(df2.head())
+
+#Reshape data so that first 4 columns('Province/State', 'Country/Region', 'Lat', 'Long') stay fixed and all the remaining date columns become rows with one column for Date and one column for Confirmed cases
+df2_melted = pd.melt(df2, id_vars=['Province/State', 'Country/Region', 'Lat', 'Long'], var_name='Date', value_name='Confirmed')
+print(df2_melted.head(10000))
