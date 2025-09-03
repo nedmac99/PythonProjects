@@ -74,7 +74,6 @@ gbr = GradientBoostingRegressor(
     max_depth=3, 
     random_state=42
 )
-
 '''
 n_estimators → number of sequential trees
 learning_rate → controls how much each tree contributes
@@ -93,22 +92,19 @@ rf_predictions = rf.predict(X_test)
 #Evaluate
 gbr_rmse = np.sqrt(mean_squared_error(y_test, gbr_predictions))
 rf_rmse = np.sqrt(mean_squared_error(y_test, rf_predictions))
-print("Gradient Boosting Regressor Root mean Squared Error(Simplified):", gbr_rmse)
-print("Random Forest Regressor Root mean Squared Error(Simplified):", rf_rmse) 
+#print("Gradient Boosting Regressor Root mean Squared Error(Simplified):", gbr_rmse)
+#print("Random Forest Regressor Root mean Squared Error(Simplified):", rf_rmse) 
 
 
 #Test Random Forest vs Linear Regression
-
 #Linear Regression
 lr = LinearRegression()
 lr.fit(X_train, y_train)
 lr_prediction = lr.predict(X_test)
 lr_rmse = np.sqrt(mean_squared_error(y_test, lr_prediction))
-
 #print("Random Forest RMSE:", rmse) #RF = 0.5053399773665033($50,500)
 #print("Linear Regression RMSE:", lr_rmse) #LR = 0.7455813830127751($74,600)
-
-#Lower RMSE = better performance
+#Note: Lower RMSE = better performance
 
 #Show importance of Features
 rf_importances = rf.feature_importances_
@@ -116,7 +112,6 @@ df_imp = pd.DataFrame({
     'Feature': X.columns,
     'Importance': rf_importances
 }).sort_values(by='Importance', ascending=False)
-
 #print(df_imp)
 
 
@@ -129,6 +124,24 @@ plt.ylabel('Feature')
 plt.title('Random Forest Feature Importances')
 plt.gca().invert_yaxis()  # highest importance on top
 plt.show()
+'''
+
+#Test Model with user data
+'''
+#Get Test data
+medinc = float(input("Enter median income (in 10k$ units, ex: 3.5): "))
+house_age = float(input("Enter house age (median age of houses in the area): "))
+avg_rooms = float(input("Enter the average number of rooms per household: "))
+avg_occupany = float(input("Enter the average occpants per household: "))
+
+#Create a single-row 2D array for the model to parse
+user_data = np.array([[medinc, house_age, avg_rooms, avg_occupany]])
+
+#Predict with trained model
+test_prediction = gbr.predict(user_data)
+
+#Produce result
+print(f"Predicted house price (in 100,000s $): {test_prediction[0]: .2f}")
 '''
 
 #Cleaner version
