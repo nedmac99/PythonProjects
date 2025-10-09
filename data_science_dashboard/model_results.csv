@@ -1,0 +1,8 @@
+Model,Accuracy,Precision,Recall,F1,AUC,Train_Time
+Logistic Regression,0.89,0.86,0.88,0.87,0.91,1.2
+Random Forest,0.93,0.91,0.92,0.92,0.96,5.7
+XGBoost,0.94,0.92,0.93,0.93,0.97,3.1
+SVM,0.90,0.89,0.88,0.88,0.92,4.5
+KNN,0.85,0.82,0.84,0.83,0.88,0.8
+Gradient Boosting,0.92,0.90,0.91,0.90,0.95,2.9
+
