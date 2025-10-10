@@ -92,14 +92,6 @@ selected_player = st.sidebar.selectbox(
 )
 
 
-# --- MOBILE-FRIENDLY LAYOUT ---
-mobile_mode = st.sidebar.checkbox("Mobile-Friendly Layout (Compact Mode)")
-if mobile_mode:
-    st.markdown(
-        "<style>body, .main, .block-container { max-width: 100vw !important; padding: 0.5rem !important; } .kpi-card { margin-bottom: 0.5rem !important; } </style>",
-        unsafe_allow_html=True,
-    )
-
 # --- CHECK IF SELECTED WEEK HAS DATA ---
 no_week_data = False
 if selected_week != "Overall":
@@ -224,6 +216,14 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.dataframe(ss_df[["Ovr", "Name", "Team", start_sit_week]], use_container_width=True)
+
+# --- MOBILE-FRIENDLY LAYOUT ---
+mobile_mode = st.sidebar.checkbox("Mobile-Friendly Layout (Compact Mode)")
+if mobile_mode:
+    st.markdown(
+        "<style>body, .main, .block-container { max-width: 100vw !important; padding: 0.5rem !important; } .kpi-card { margin-bottom: 0.5rem !important; } </style>",
+        unsafe_allow_html=True,
+    )
 
 # --- SLEEPER PICKS SECTION ---
 st.subheader("Potential Sleeper Picks")
