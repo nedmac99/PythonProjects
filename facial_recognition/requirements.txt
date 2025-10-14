@@ -1,0 +1,8 @@
+cv2
+os
+numpy
+mtcnn
+deepface
+pathlib
+scipy
+datetime
