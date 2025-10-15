@@ -1,11 +1,10 @@
-tensorflow
-keras
-deepfac
+tensorflow==2.13.0
+keras<3
+deepface==0.0.88
 mtcnn
-numpy
+numpy==2.2.0
 Pillow
 scipy
 opencv-python-headless
 opencv-contrib-python-headless
 streamlit
-
