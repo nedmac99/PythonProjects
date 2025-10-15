@@ -1,8 +1,8 @@
-cv2
-os
+streamlit
 numpy
 mtcnn
 deepface
-pathlib
 scipy
-datetime
+opencv-python-headless
+opencv-contrib-python-headless
+Pillow
