@@ -106,11 +106,11 @@ class FaceRecognizer(VideoTransformerBase):
 st.title("Live Face Recognition Attendance System")
 webrtc_streamer(
     key="example",
-    video_frame_callback=YourVideoTransformer().transform,
     media_stream_constraints={
         "video": {"width": 1280, "height": 720, "frameRate": 30}
     },
 )
+
 
 
 
