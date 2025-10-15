@@ -1,5 +1,109 @@
 import streamlit as st
 import cv2
+from deepface import DeepFace
+import os
+from pathlib import Path
+import numpy as np
+from PIL import Image
+
+# --- Paths ---
+db_path = Path("faces")  # folder with known faces
+db_path.mkdir(exist_ok=True)
+
+# --- Sidebar Controls ---
+st.sidebar.title("Controls")
+camera_on = st.sidebar.checkbox("Camera On", value=False)
+uploaded_file = None
+if not camera_on:
+    uploaded_file = st.sidebar.file_uploader(
+        "Or upload an image", type=["jpg", "png", "jpeg"]
+    )
+
+# --- Load known embeddings ---
+known_embeddings = []
+known_names = []
+
+for file in os.listdir(db_path):
+    if file.lower().endswith((".jpg", ".png", ".jpeg")):
+        img_path = str(db_path / file)
+        emb = DeepFace.represent(img_path=img_path, model_name="VGG-Face")[0]["embedding"]
+        known_embeddings.append(np.array(emb))
+        known_names.append(file.split(".")[0])
+
+# --- Main Display ---
+frame_placeholder = st.empty()
+
+def recognize_faces(frame):
+    try:
+        # Save temp image for DeepFace
+        tmp_path = "temp.jpg"
+        cv2.imwrite(tmp_path, cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
+
+        emb = DeepFace.represent(img_path=tmp_path, model_name="VGG-Face")[0]["embedding"]
+        emb = np.array(emb)
+
+        # Compute distances to known embeddings
+        if known_embeddings:
+            distances = np.linalg.norm(known_embeddings - emb, axis=1)
+            min_idx = np.argmin(distances)
+            if distances[min_idx] < 0.6:
+                return known_names[min_idx]
+        return "Unknown"
+    except:
+        return "Error"
+
+if camera_on:
+    # --- Webcam mode ---
+    cap = cv2.VideoCapture(0)
+    if not cap.isOpened():
+        st.error("Cannot access camera.")
+    else:
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                st.warning("Failed to capture frame")
+                break
+
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            name = recognize_faces(frame_rgb)
+            cv2.putText(
+                frame_rgb, name, (30, 50),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2
+            )
+            frame_placeholder.image(frame_rgb, channels="RGB", use_column_width=True)
+else:
+    # --- Uploaded image mode ---
+    if uploaded_file:
+        img = Image.open(uploaded_file).convert("RGB")
+        img_np = np.array(img)
+        name = recognize_faces(img_np)
+        cv2.putText(
+            img_np, name, (30, 50),
+            cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2
+        )
+        frame_placeholder.image(img_np, channels="RGB", use_column_width=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+import streamlit as st
+import cv2
 import os
 import numpy as np
 from mtcnn import MTCNN
@@ -212,5 +316,6 @@ if st.session_state.cap is not None:
     cap.release()
     st.session_state.cap = None
     st.success("Camera stopped")
+'''
 
 
