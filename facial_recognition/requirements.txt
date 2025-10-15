@@ -2,7 +2,7 @@ tensorflow==2.13.0
 keras<3
 deepface==0.0.88
 mtcnn
-numpy==2.2.0
+numpy>=1.22,<1.25
 Pillow
 scipy
 opencv-python-headless
