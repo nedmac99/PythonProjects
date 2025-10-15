@@ -12,15 +12,8 @@ from PIL import Image
 # ----------------------------------------
 # Auto-refresh every 3 seconds
 # ----------------------------------------
-st.set_page_config(page_title="Face Recognition Attendance", layout="wide")
-st_autorefresh = st.experimental_rerun  # fallback alias if not available
-
-try:
-    from streamlit_autorefresh import st_autorefresh
-except ImportError:
-    from streamlit.runtime.scriptrunner import RerunException, RerunData
-
-st_autorefresh(interval=3000, key="refresh")  # every 3 seconds
+from streamlit_autorefresh import st_autorefresh
+st_autorefresh(interval=3000, key="refresh")
 
 # ----------------------------------------
 # Setup paths and thresholds
@@ -345,6 +338,7 @@ if st.session_state.cap is not None:
     st.session_state.cap = None
     st.success("Camera stopped")
 '''
+
 
 
 
