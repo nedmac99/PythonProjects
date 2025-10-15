@@ -1,11 +1,10 @@
 streamlit
-numpy
-mtcnn
-deepface
-scipy
-opencv-python-headless
-opencv-contrib-python-headless
+numpy==2.2.0
 Pillow
+scipy
+mtcnn
+deepface==0.0.88
 tensorflow==2.13.0
 keras<3
-tf-keras
+opencv-python-headless
+opencv-contrib-python-headless
