@@ -104,7 +104,15 @@ class FaceRecognizer(VideoTransformerBase):
 # Streamlit UI
 # -----------------------------
 st.title("Live Face Recognition Attendance System")
-webrtc_streamer(key="face-recog", video_transformer_factory=FaceRecognizer)
+webrtc_streamer(
+    key="example",
+    video_frame_callback=YourVideoTransformer().transform,
+    media_stream_constraints={
+        "video": {"width": 1280, "height": 720, "frameRate": 30}
+    },
+)
+
+
 
 
 
