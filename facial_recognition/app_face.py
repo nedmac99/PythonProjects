@@ -7,6 +7,7 @@ from deepface import DeepFace
 from scipy.spatial.distance import cosine
 from pathlib import Path
 from datetime import datetime
+import os
 
 # -----------------------------
 # Config
@@ -104,6 +105,7 @@ class FaceRecognizer(VideoTransformerBase):
 # -----------------------------
 st.title("Live Face Recognition Attendance System")
 webrtc_streamer(key="face-recog", video_transformer_factory=FaceRecognizer)
+
 
 
 
