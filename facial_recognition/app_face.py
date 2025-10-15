@@ -103,8 +103,10 @@ class FaceRecognizer(VideoTransformerBase):
 # -----------------------------
 # Streamlit UI
 # -----------------------------
-st.title("Live Face Recognition Attendance System")
+st.title("Live Face Recognition System")
+st.subheader("Built by Camden")
 webrtc_streamer(key="face-recog", video_transformer_factory=FaceRecognizer)
+
 
 
 
