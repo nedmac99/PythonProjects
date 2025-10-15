@@ -12,7 +12,8 @@ from PIL import Image
 # -----------------------------
 # Config
 # -----------------------------
-db_path = Path("faces")  # adjust if needed
+db_path = Path("faces")
+db_path.mkdir(exist_ok=True)  # creates folder if it doesn't exist
 cosine_threshold = 0.63
 confidence_threshold = 0.95
 detect_interval = 5
@@ -211,3 +212,4 @@ if st.session_state.cap is not None:
     cap.release()
     st.session_state.cap = None
     st.success("Camera stopped")
+
