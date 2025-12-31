@@ -26,6 +26,38 @@ DEV_POINTS = {
 STRATUS_POINTS = 0.75
 HOMEFILL_POINTS = 2.0
 
+# Per-unit points for newly added unit types
+UNIT_POINTS = {
+    "Perfecto 2V": {
+        "QM Warranty": 1.0,
+        "Flat Rate": 1.25,
+        "Manufacture Warranty": 1.25,
+    },
+    "M10": {
+        "QM Warranty": 1.25,
+        "Flat Rate": 1.75,
+        "Manufacture Warranty": 1.75,
+    },
+    "Rhythm LM5A": {
+        "QM Warranty": 0.75,
+        "Flat Rate": 1.0,
+        "Manufacture Warranty": 1.0,
+    },
+    "Rhythm LM5BA": {
+        "QM Warranty": 0.75,
+        "Flat Rate": 1.0,
+        "Manufacture Warranty": 1.0,
+    },
+    "Rhythm LM5CA": {
+        "QM Warranty": 0.75,
+        "Flat Rate": 1.0,
+        "Manufacture Warranty": 1.0,
+    },
+    "POC": {
+        "Repair": 2.0,
+    },
+}
+
 
 def load_progress():
     if FILE_PATH.exists():
@@ -52,6 +84,23 @@ def load_progress():
                         "count_1025_minor": int(row.get("count_1025_minor", 0)),
                         "count_1025_flat": int(row.get("count_1025_flat", 0)),
                         "count_1025_manuf": int(row.get("count_1025_manuf", 0)),
+                        # New unit type counters
+                        "count_perfecto_qm": int(row.get("count_perfecto_qm", 0)),
+                        "count_perfecto_flat": int(row.get("count_perfecto_flat", 0)),
+                        "count_perfecto_manuf": int(row.get("count_perfecto_manuf", 0)),
+                        "count_m10_qm": int(row.get("count_m10_qm", 0)),
+                        "count_m10_flat": int(row.get("count_m10_flat", 0)),
+                        "count_m10_manuf": int(row.get("count_m10_manuf", 0)),
+                        "count_lm5a_qm": int(row.get("count_lm5a_qm", 0)),
+                        "count_lm5a_flat": int(row.get("count_lm5a_flat", 0)),
+                        "count_lm5a_manuf": int(row.get("count_lm5a_manuf", 0)),
+                        "count_lm5ba_qm": int(row.get("count_lm5ba_qm", 0)),
+                        "count_lm5ba_flat": int(row.get("count_lm5ba_flat", 0)),
+                        "count_lm5ba_manuf": int(row.get("count_lm5ba_manuf", 0)),
+                        "count_lm5ca_qm": int(row.get("count_lm5ca_qm", 0)),
+                        "count_lm5ca_flat": int(row.get("count_lm5ca_flat", 0)),
+                        "count_lm5ca_manuf": int(row.get("count_lm5ca_manuf", 0)),
+                        "count_poc_repair": int(row.get("count_poc_repair", 0)),
                         "start_date": row.get("start_date") or "",
                         "start_of_day_output": int(row.get("start_of_day_output", 0)),
                     }
@@ -91,6 +140,23 @@ def load_progress():
         "count_1025_minor": 0,
         "count_1025_flat": 0,
         "count_1025_manuf": 0,
+        # New unit type counters (defaults)
+        "count_perfecto_qm": 0,
+        "count_perfecto_flat": 0,
+        "count_perfecto_manuf": 0,
+        "count_m10_qm": 0,
+        "count_m10_flat": 0,
+        "count_m10_manuf": 0,
+        "count_lm5a_qm": 0,
+        "count_lm5a_flat": 0,
+        "count_lm5a_manuf": 0,
+        "count_lm5ba_qm": 0,
+        "count_lm5ba_flat": 0,
+        "count_lm5ba_manuf": 0,
+        "count_lm5ca_qm": 0,
+        "count_lm5ca_flat": 0,
+        "count_lm5ca_manuf": 0,
+        "count_poc_repair": 0,
         "start_date": date.today().isoformat(),
         "start_of_day_output": 0,
     }
@@ -119,6 +185,23 @@ def save_progress(state):
                 "count_1025_minor",
                 "count_1025_flat",
                 "count_1025_manuf",
+                # New unit types
+                "count_perfecto_qm",
+                "count_perfecto_flat",
+                "count_perfecto_manuf",
+                "count_m10_qm",
+                "count_m10_flat",
+                "count_m10_manuf",
+                "count_lm5a_qm",
+                "count_lm5a_flat",
+                "count_lm5a_manuf",
+                "count_lm5ba_qm",
+                "count_lm5ba_flat",
+                "count_lm5ba_manuf",
+                "count_lm5ca_qm",
+                "count_lm5ca_flat",
+                "count_lm5ca_manuf",
+                "count_poc_repair",
                 "start_date",
                 "start_of_day_output",
             ],
@@ -144,6 +227,23 @@ def save_progress(state):
                 "count_1025_minor": state.get("count_1025_minor", 0),
                 "count_1025_flat": state.get("count_1025_flat", 0),
                 "count_1025_manuf": state.get("count_1025_manuf", 0),
+                # New unit types
+                "count_perfecto_qm": state.get("count_perfecto_qm", 0),
+                "count_perfecto_flat": state.get("count_perfecto_flat", 0),
+                "count_perfecto_manuf": state.get("count_perfecto_manuf", 0),
+                "count_m10_qm": state.get("count_m10_qm", 0),
+                "count_m10_flat": state.get("count_m10_flat", 0),
+                "count_m10_manuf": state.get("count_m10_manuf", 0),
+                "count_lm5a_qm": state.get("count_lm5a_qm", 0),
+                "count_lm5a_flat": state.get("count_lm5a_flat", 0),
+                "count_lm5a_manuf": state.get("count_lm5a_manuf", 0),
+                "count_lm5ba_qm": state.get("count_lm5ba_qm", 0),
+                "count_lm5ba_flat": state.get("count_lm5ba_flat", 0),
+                "count_lm5ba_manuf": state.get("count_lm5ba_manuf", 0),
+                "count_lm5ca_qm": state.get("count_lm5ca_qm", 0),
+                "count_lm5ca_flat": state.get("count_lm5ca_flat", 0),
+                "count_lm5ca_manuf": state.get("count_lm5ca_manuf", 0),
+                "count_poc_repair": state.get("count_poc_repair", 0),
                 "start_date": state.get("start_date", date.today().isoformat()),
                 "start_of_day_output": state.get("start_of_day_output", 0),
             }
@@ -163,8 +263,15 @@ class WeightedOutputApp(tk.Tk):
         self.state = load_progress()
         # ensure keys exist for older CSVs
         for k in ("count_stratus","count_homefill","count_homefill_flat","count_homefill_manuf",
-                "count_qm","count_pm","count_minor","count_flat","count_manuf",
-                "count_1025_qm","count_1025_pm","count_1025_minor","count_1025_flat","count_1025_manuf"):
+            "count_qm","count_pm","count_minor","count_flat","count_manuf",
+            "count_1025_qm","count_1025_pm","count_1025_minor","count_1025_flat","count_1025_manuf",
+            # new unit types
+            "count_perfecto_qm","count_perfecto_flat","count_perfecto_manuf",
+            "count_m10_qm","count_m10_flat","count_m10_manuf",
+            "count_lm5a_qm","count_lm5a_flat","count_lm5a_manuf",
+            "count_lm5ba_qm","count_lm5ba_flat","count_lm5ba_manuf",
+            "count_lm5ca_qm","count_lm5ca_flat","count_lm5ca_manuf",
+            "count_poc_repair"):
             self.state.setdefault(k, 0)
         # ensure start-of-day on startup
         self._ensure_start_of_day()
@@ -292,6 +399,87 @@ class WeightedOutputApp(tk.Tk):
 
         ttk.Button(dev10, text="Add", command=self._add_1025).grid(row=2, column=0, pady=(6, 0), sticky="w")
 
+        # Perfecto 2V add
+        perfecto = ttk.LabelFrame(parent, text="Perfecto 2V (enter per-warranty quantities)", padding=8)
+        perfecto.grid(row=4, column=0, sticky="ew", pady=(10, 0))
+        self.add_perfecto_qm = tk.StringVar(value="0")
+        self.add_perfecto_flat = tk.StringVar(value="0")
+        self.add_perfecto_manuf = tk.StringVar(value="0")
+        self._row_inputs(perfecto, 0, [
+            ("QM Warranty", self.add_perfecto_qm),
+            ("Flat Rate", self.add_perfecto_flat),
+            ("Manufacture Warranty", self.add_perfecto_manuf),
+        ])
+        ttk.Button(perfecto, text="Add", command=self._add_perfecto).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # M10 add
+        m10 = ttk.LabelFrame(parent, text="M10 (enter per-warranty quantities)", padding=8)
+        m10.grid(row=5, column=0, sticky="ew", pady=(10, 0))
+        self.add_m10_qm = tk.StringVar(value="0")
+        self.add_m10_flat = tk.StringVar(value="0")
+        self.add_m10_manuf = tk.StringVar(value="0")
+        self._row_inputs(m10, 0, [
+            ("QM Warranty", self.add_m10_qm),
+            ("Flat Rate", self.add_m10_flat),
+            ("Manufacture Warranty", self.add_m10_manuf),
+        ])
+        ttk.Button(m10, text="Add", command=self._add_m10).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # Rhythm LM5A add
+        lm5a = ttk.LabelFrame(parent, text="Rhythm LM5A (enter per-warranty quantities)", padding=8)
+        lm5a.grid(row=6, column=0, sticky="ew", pady=(10, 0))
+        self.add_lm5a_qm = tk.StringVar(value="0")
+        self.add_lm5a_flat = tk.StringVar(value="0")
+        self.add_lm5a_manuf = tk.StringVar(value="0")
+        self._row_inputs(lm5a, 0, [
+            ("QM Warranty", self.add_lm5a_qm),
+            ("Flat Rate", self.add_lm5a_flat),
+            ("Manufacture Warranty", self.add_lm5a_manuf),
+        ])
+        ttk.Button(lm5a, text="Add", command=self._add_lm5a).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # Rhythm LM5BA add
+        lm5ba = ttk.LabelFrame(parent, text="Rhythm LM5BA (enter per-warranty quantities)", padding=8)
+        lm5ba.grid(row=7, column=0, sticky="ew", pady=(10, 0))
+        self.add_lm5ba_qm = tk.StringVar(value="0")
+        self.add_lm5ba_flat = tk.StringVar(value="0")
+        self.add_lm5ba_manuf = tk.StringVar(value="0")
+        self._row_inputs(lm5ba, 0, [
+            ("QM Warranty", self.add_lm5ba_qm),
+            ("Flat Rate", self.add_lm5ba_flat),
+            ("Manufacture Warranty", self.add_lm5ba_manuf),
+        ])
+        ttk.Button(lm5ba, text="Add", command=self._add_lm5ba).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # Rhythm LM5CA add
+        lm5ca = ttk.LabelFrame(parent, text="Rhythm LM5CA (enter per-warranty quantities)", padding=8)
+        lm5ca.grid(row=8, column=0, sticky="ew", pady=(10, 0))
+        self.add_lm5ca_qm = tk.StringVar(value="0")
+        self.add_lm5ca_flat = tk.StringVar(value="0")
+        self.add_lm5ca_manuf = tk.StringVar(value="0")
+        self._row_inputs(lm5ca, 0, [
+            ("QM Warranty", self.add_lm5ca_qm),
+            ("Flat Rate", self.add_lm5ca_flat),
+            ("Manufacture Warranty", self.add_lm5ca_manuf),
+        ])
+        ttk.Button(lm5ca, text="Add", command=self._add_lm5ca).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # POC add
+        poc = ttk.LabelFrame(parent, text="POC (enter quantity)", padding=8)
+        poc.grid(row=9, column=0, sticky="ew", pady=(10, 0))
+        self.add_poc_repair = tk.StringVar(value="0")
+        self._row_inputs(poc, 0, [
+            ("Repair", self.add_poc_repair),
+        ])
+        ttk.Button(poc, text="Add", command=self._add_poc).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # Flow these sections into columns when nearing bottom
+        self.add_sections = [
+            str_frame, hf_frame, dev, dev10, perfecto, m10, lm5a, lm5ba, lm5ca, poc
+        ]
+        parent.bind("<Configure>", lambda e: self._flow_layout(parent, self.add_sections, columns=2))
+        self._flow_layout(parent, self.add_sections, columns=2)
+
     def _build_remove_tab(self, parent):
         # Stratus remove (subcategories)
         str_frame = ttk.LabelFrame(parent, text="Stratus (enter per-type quantities)", padding=8)
@@ -354,6 +542,87 @@ class WeightedOutputApp(tk.Tk):
         ])
 
         ttk.Button(dev10, text="Remove", command=self._remove_1025).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # Perfecto 2V remove
+        perfecto = ttk.LabelFrame(parent, text="Perfecto 2V (enter per-warranty quantities)", padding=8)
+        perfecto.grid(row=4, column=0, sticky="ew", pady=(10, 0))
+        self.rem_perfecto_qm = tk.StringVar(value="0")
+        self.rem_perfecto_flat = tk.StringVar(value="0")
+        self.rem_perfecto_manuf = tk.StringVar(value="0")
+        self._row_inputs(perfecto, 0, [
+            ("QM Warranty", self.rem_perfecto_qm),
+            ("Flat Rate", self.rem_perfecto_flat),
+            ("Manufacture Warranty", self.rem_perfecto_manuf),
+        ])
+        ttk.Button(perfecto, text="Remove", command=self._remove_perfecto).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # M10 remove
+        m10 = ttk.LabelFrame(parent, text="M10 (enter per-warranty quantities)", padding=8)
+        m10.grid(row=5, column=0, sticky="ew", pady=(10, 0))
+        self.rem_m10_qm = tk.StringVar(value="0")
+        self.rem_m10_flat = tk.StringVar(value="0")
+        self.rem_m10_manuf = tk.StringVar(value="0")
+        self._row_inputs(m10, 0, [
+            ("QM Warranty", self.rem_m10_qm),
+            ("Flat Rate", self.rem_m10_flat),
+            ("Manufacture Warranty", self.rem_m10_manuf),
+        ])
+        ttk.Button(m10, text="Remove", command=self._remove_m10).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # Rhythm LM5A remove
+        lm5a = ttk.LabelFrame(parent, text="Rhythm LM5A (enter per-warranty quantities)", padding=8)
+        lm5a.grid(row=6, column=0, sticky="ew", pady=(10, 0))
+        self.rem_lm5a_qm = tk.StringVar(value="0")
+        self.rem_lm5a_flat = tk.StringVar(value="0")
+        self.rem_lm5a_manuf = tk.StringVar(value="0")
+        self._row_inputs(lm5a, 0, [
+            ("QM Warranty", self.rem_lm5a_qm),
+            ("Flat Rate", self.rem_lm5a_flat),
+            ("Manufacture Warranty", self.rem_lm5a_manuf),
+        ])
+        ttk.Button(lm5a, text="Remove", command=self._remove_lm5a).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # Rhythm LM5BA remove
+        lm5ba = ttk.LabelFrame(parent, text="Rhythm LM5BA (enter per-warranty quantities)", padding=8)
+        lm5ba.grid(row=7, column=0, sticky="ew", pady=(10, 0))
+        self.rem_lm5ba_qm = tk.StringVar(value="0")
+        self.rem_lm5ba_flat = tk.StringVar(value="0")
+        self.rem_lm5ba_manuf = tk.StringVar(value="0")
+        self._row_inputs(lm5ba, 0, [
+            ("QM Warranty", self.rem_lm5ba_qm),
+            ("Flat Rate", self.rem_lm5ba_flat),
+            ("Manufacture Warranty", self.rem_lm5ba_manuf),
+        ])
+        ttk.Button(lm5ba, text="Remove", command=self._remove_lm5ba).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # Rhythm LM5CA remove
+        lm5ca = ttk.LabelFrame(parent, text="Rhythm LM5CA (enter per-warranty quantities)", padding=8)
+        lm5ca.grid(row=8, column=0, sticky="ew", pady=(10, 0))
+        self.rem_lm5ca_qm = tk.StringVar(value="0")
+        self.rem_lm5ca_flat = tk.StringVar(value="0")
+        self.rem_lm5ca_manuf = tk.StringVar(value="0")
+        self._row_inputs(lm5ca, 0, [
+            ("QM Warranty", self.rem_lm5ca_qm),
+            ("Flat Rate", self.rem_lm5ca_flat),
+            ("Manufacture Warranty", self.rem_lm5ca_manuf),
+        ])
+        ttk.Button(lm5ca, text="Remove", command=self._remove_lm5ca).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # POC remove
+        poc = ttk.LabelFrame(parent, text="POC (enter quantity)", padding=8)
+        poc.grid(row=9, column=0, sticky="ew", pady=(10, 0))
+        self.rem_poc_repair = tk.StringVar(value="0")
+        self._row_inputs(poc, 0, [
+            ("Repair", self.rem_poc_repair),
+        ])
+        ttk.Button(poc, text="Remove", command=self._remove_poc).grid(row=2, column=0, pady=(6, 0), sticky="w")
+
+        # Flow these sections into columns when nearing bottom
+        self.rem_sections = [
+            str_frame, hf_frame, dev, dev10, perfecto, m10, lm5a, lm5ba, lm5ca, poc
+        ]
+        parent.bind("<Configure>", lambda e: self._flow_layout(parent, self.rem_sections, columns=2))
+        self._flow_layout(parent, self.rem_sections, columns=2)
 
     def _row_inputs(self, parent, start_row, pairs):
         # Helper to place label/entry pairs in grid, two per row if space
@@ -473,6 +742,123 @@ class WeightedOutputApp(tk.Tk):
         save_progress(self.state)
         self._refresh_totals()
         messagebox.showinfo("Added", f"Added {total} unit(s) across 1025 warranties.")
+
+    def _add_perfecto(self):
+        q = self._parse_nonneg(self.add_perfecto_qm)
+        f = self._parse_nonneg(self.add_perfecto_flat)
+        w = self._parse_nonneg(self.add_perfecto_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one Perfecto 2V quantity to add.")
+            return
+        self.state["output"] += total
+        self.state["weighted_output"] += (
+            UNIT_POINTS["Perfecto 2V"]["QM Warranty"] * q
+            + UNIT_POINTS["Perfecto 2V"]["Flat Rate"] * f
+            + UNIT_POINTS["Perfecto 2V"]["Manufacture Warranty"] * w
+        )
+        self.state["count_perfecto_qm"] = self.state.get("count_perfecto_qm", 0) + q
+        self.state["count_perfecto_flat"] = self.state.get("count_perfecto_flat", 0) + f
+        self.state["count_perfecto_manuf"] = self.state.get("count_perfecto_manuf", 0) + w
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Added", f"Added {total} Perfecto 2V unit(s).")
+
+    def _add_m10(self):
+        q = self._parse_nonneg(self.add_m10_qm)
+        f = self._parse_nonneg(self.add_m10_flat)
+        w = self._parse_nonneg(self.add_m10_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one M10 quantity to add.")
+            return
+        self.state["output"] += total
+        self.state["weighted_output"] += (
+            UNIT_POINTS["M10"]["QM Warranty"] * q
+            + UNIT_POINTS["M10"]["Flat Rate"] * f
+            + UNIT_POINTS["M10"]["Manufacture Warranty"] * w
+        )
+        self.state["count_m10_qm"] = self.state.get("count_m10_qm", 0) + q
+        self.state["count_m10_flat"] = self.state.get("count_m10_flat", 0) + f
+        self.state["count_m10_manuf"] = self.state.get("count_m10_manuf", 0) + w
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Added", f"Added {total} M10 unit(s).")
+
+    def _add_lm5a(self):
+        q = self._parse_nonneg(self.add_lm5a_qm)
+        f = self._parse_nonneg(self.add_lm5a_flat)
+        w = self._parse_nonneg(self.add_lm5a_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one Rhythm LM5A quantity to add.")
+            return
+        self.state["output"] += total
+        self.state["weighted_output"] += (
+            UNIT_POINTS["Rhythm LM5A"]["QM Warranty"] * q
+            + UNIT_POINTS["Rhythm LM5A"]["Flat Rate"] * f
+            + UNIT_POINTS["Rhythm LM5A"]["Manufacture Warranty"] * w
+        )
+        self.state["count_lm5a_qm"] = self.state.get("count_lm5a_qm", 0) + q
+        self.state["count_lm5a_flat"] = self.state.get("count_lm5a_flat", 0) + f
+        self.state["count_lm5a_manuf"] = self.state.get("count_lm5a_manuf", 0) + w
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Added", f"Added {total} Rhythm LM5A unit(s).")
+
+    def _add_lm5ba(self):
+        q = self._parse_nonneg(self.add_lm5ba_qm)
+        f = self._parse_nonneg(self.add_lm5ba_flat)
+        w = self._parse_nonneg(self.add_lm5ba_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one Rhythm LM5BA quantity to add.")
+            return
+        self.state["output"] += total
+        self.state["weighted_output"] += (
+            UNIT_POINTS["Rhythm LM5BA"]["QM Warranty"] * q
+            + UNIT_POINTS["Rhythm LM5BA"]["Flat Rate"] * f
+            + UNIT_POINTS["Rhythm LM5BA"]["Manufacture Warranty"] * w
+        )
+        self.state["count_lm5ba_qm"] = self.state.get("count_lm5ba_qm", 0) + q
+        self.state["count_lm5ba_flat"] = self.state.get("count_lm5ba_flat", 0) + f
+        self.state["count_lm5ba_manuf"] = self.state.get("count_lm5ba_manuf", 0) + w
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Added", f"Added {total} Rhythm LM5BA unit(s).")
+
+    def _add_lm5ca(self):
+        q = self._parse_nonneg(self.add_lm5ca_qm)
+        f = self._parse_nonneg(self.add_lm5ca_flat)
+        w = self._parse_nonneg(self.add_lm5ca_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one Rhythm LM5CA quantity to add.")
+            return
+        self.state["output"] += total
+        self.state["weighted_output"] += (
+            UNIT_POINTS["Rhythm LM5CA"]["QM Warranty"] * q
+            + UNIT_POINTS["Rhythm LM5CA"]["Flat Rate"] * f
+            + UNIT_POINTS["Rhythm LM5CA"]["Manufacture Warranty"] * w
+        )
+        self.state["count_lm5ca_qm"] = self.state.get("count_lm5ca_qm", 0) + q
+        self.state["count_lm5ca_flat"] = self.state.get("count_lm5ca_flat", 0) + f
+        self.state["count_lm5ca_manuf"] = self.state.get("count_lm5ca_manuf", 0) + w
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Added", f"Added {total} Rhythm LM5CA unit(s).")
+
+    def _add_poc(self):
+        r = self._parse_nonneg(self.add_poc_repair)
+        if r == 0:
+            messagebox.showinfo("No Action", "Enter at least one POC Repair quantity to add.")
+            return
+        self.state["output"] += r
+        self.state["weighted_output"] += UNIT_POINTS["POC"]["Repair"] * r
+        self.state["count_poc_repair"] = self.state.get("count_poc_repair", 0) + r
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Added", f"Added {r} POC Repair unit(s).")
 
     # ---- Remove handlers ----
     def _remove_stratus(self):
@@ -629,14 +1015,197 @@ class WeightedOutputApp(tk.Tk):
         self._refresh_totals()
         messagebox.showinfo("Removed", f"Removed {total} unit(s) across 1025 warranties.")
 
+    def _remove_perfecto(self):
+        if self.state["output"] == 0:
+            messagebox.showwarning("No Units", "No units to remove.")
+            return
+        q = self._parse_nonneg(self.rem_perfecto_qm)
+        f = self._parse_nonneg(self.rem_perfecto_flat)
+        w = self._parse_nonneg(self.rem_perfecto_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one Perfecto 2V quantity to remove.")
+            return
+        if total > self.state["output"]:
+            messagebox.showwarning("Too Many", "Cannot remove more than total output.")
+            return
+        if q > self.state.get("count_perfecto_qm", 0) or f > self.state.get("count_perfecto_flat", 0) or w > self.state.get("count_perfecto_manuf", 0):
+            messagebox.showwarning("Too Many", "Cannot remove more than recorded for Perfecto 2V categories.")
+            return
+        self.state["output"] -= total
+        self.state["weighted_output"] -= (
+            UNIT_POINTS["Perfecto 2V"]["QM Warranty"] * q
+            + UNIT_POINTS["Perfecto 2V"]["Flat Rate"] * f
+            + UNIT_POINTS["Perfecto 2V"]["Manufacture Warranty"] * w
+        )
+        self.state["count_perfecto_qm"] -= q
+        self.state["count_perfecto_flat"] -= f
+        self.state["count_perfecto_manuf"] -= w
+        if self.state["output"] == 0:
+            self.state["weighted_output"] = 0.0
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Removed", f"Removed {total} Perfecto 2V unit(s).")
+
+    def _remove_m10(self):
+        if self.state["output"] == 0:
+            messagebox.showwarning("No Units", "No units to remove.")
+            return
+        q = self._parse_nonneg(self.rem_m10_qm)
+        f = self._parse_nonneg(self.rem_m10_flat)
+        w = self._parse_nonneg(self.rem_m10_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one M10 quantity to remove.")
+            return
+        if total > self.state["output"]:
+            messagebox.showwarning("Too Many", "Cannot remove more than total output.")
+            return
+        if q > self.state.get("count_m10_qm", 0) or f > self.state.get("count_m10_flat", 0) or w > self.state.get("count_m10_manuf", 0):
+            messagebox.showwarning("Too Many", "Cannot remove more than recorded for M10 categories.")
+            return
+        self.state["output"] -= total
+        self.state["weighted_output"] -= (
+            UNIT_POINTS["M10"]["QM Warranty"] * q
+            + UNIT_POINTS["M10"]["Flat Rate"] * f
+            + UNIT_POINTS["M10"]["Manufacture Warranty"] * w
+        )
+        self.state["count_m10_qm"] -= q
+        self.state["count_m10_flat"] -= f
+        self.state["count_m10_manuf"] -= w
+        if self.state["output"] == 0:
+            self.state["weighted_output"] = 0.0
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Removed", f"Removed {total} M10 unit(s).")
+
+    def _remove_lm5a(self):
+        if self.state["output"] == 0:
+            messagebox.showwarning("No Units", "No units to remove.")
+            return
+        q = self._parse_nonneg(self.rem_lm5a_qm)
+        f = self._parse_nonneg(self.rem_lm5a_flat)
+        w = self._parse_nonneg(self.rem_lm5a_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one Rhythm LM5A quantity to remove.")
+            return
+        if total > self.state["output"]:
+            messagebox.showwarning("Too Many", "Cannot remove more than total output.")
+            return
+        if q > self.state.get("count_lm5a_qm", 0) or f > self.state.get("count_lm5a_flat", 0) or w > self.state.get("count_lm5a_manuf", 0):
+            messagebox.showwarning("Too Many", "Cannot remove more than recorded for Rhythm LM5A categories.")
+            return
+        self.state["output"] -= total
+        self.state["weighted_output"] -= (
+            UNIT_POINTS["Rhythm LM5A"]["QM Warranty"] * q
+            + UNIT_POINTS["Rhythm LM5A"]["Flat Rate"] * f
+            + UNIT_POINTS["Rhythm LM5A"]["Manufacture Warranty"] * w
+        )
+        self.state["count_lm5a_qm"] -= q
+        self.state["count_lm5a_flat"] -= f
+        self.state["count_lm5a_manuf"] -= w
+        if self.state["output"] == 0:
+            self.state["weighted_output"] = 0.0
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Removed", f"Removed {total} Rhythm LM5A unit(s).")
+
+    def _remove_lm5ba(self):
+        if self.state["output"] == 0:
+            messagebox.showwarning("No Units", "No units to remove.")
+            return
+        q = self._parse_nonneg(self.rem_lm5ba_qm)
+        f = self._parse_nonneg(self.rem_lm5ba_flat)
+        w = self._parse_nonneg(self.rem_lm5ba_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one Rhythm LM5BA quantity to remove.")
+            return
+        if total > self.state["output"]:
+            messagebox.showwarning("Too Many", "Cannot remove more than total output.")
+            return
+        if q > self.state.get("count_lm5ba_qm", 0) or f > self.state.get("count_lm5ba_flat", 0) or w > self.state.get("count_lm5ba_manuf", 0):
+            messagebox.showwarning("Too Many", "Cannot remove more than recorded for Rhythm LM5BA categories.")
+            return
+        self.state["output"] -= total
+        self.state["weighted_output"] -= (
+            UNIT_POINTS["Rhythm LM5BA"]["QM Warranty"] * q
+            + UNIT_POINTS["Rhythm LM5BA"]["Flat Rate"] * f
+            + UNIT_POINTS["Rhythm LM5BA"]["Manufacture Warranty"] * w
+        )
+        self.state["count_lm5ba_qm"] -= q
+        self.state["count_lm5ba_flat"] -= f
+        self.state["count_lm5ba_manuf"] -= w
+        if self.state["output"] == 0:
+            self.state["weighted_output"] = 0.0
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Removed", f"Removed {total} Rhythm LM5BA unit(s).")
+
+    def _remove_lm5ca(self):
+        if self.state["output"] == 0:
+            messagebox.showwarning("No Units", "No units to remove.")
+            return
+        q = self._parse_nonneg(self.rem_lm5ca_qm)
+        f = self._parse_nonneg(self.rem_lm5ca_flat)
+        w = self._parse_nonneg(self.rem_lm5ca_manuf)
+        total = q + f + w
+        if total == 0:
+            messagebox.showinfo("No Action", "Enter at least one Rhythm LM5CA quantity to remove.")
+            return
+        if total > self.state["output"]:
+            messagebox.showwarning("Too Many", "Cannot remove more than total output.")
+            return
+        if q > self.state.get("count_lm5ca_qm", 0) or f > self.state.get("count_lm5ca_flat", 0) or w > self.state.get("count_lm5ca_manuf", 0):
+            messagebox.showwarning("Too Many", "Cannot remove more than recorded for Rhythm LM5CA categories.")
+            return
+        self.state["output"] -= total
+        self.state["weighted_output"] -= (
+            UNIT_POINTS["Rhythm LM5CA"]["QM Warranty"] * q
+            + UNIT_POINTS["Rhythm LM5CA"]["Flat Rate"] * f
+            + UNIT_POINTS["Rhythm LM5CA"]["Manufacture Warranty"] * w
+        )
+        self.state["count_lm5ca_qm"] -= q
+        self.state["count_lm5ca_flat"] -= f
+        self.state["count_lm5ca_manuf"] -= w
+        if self.state["output"] == 0:
+            self.state["weighted_output"] = 0.0
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Removed", f"Removed {total} Rhythm LM5CA unit(s).")
+
+    def _remove_poc(self):
+        if self.state["output"] == 0:
+            messagebox.showwarning("No Units", "No units to remove.")
+            return
+        r = self._parse_nonneg(self.rem_poc_repair)
+        if r == 0:
+            messagebox.showinfo("No Action", "Enter at least one POC Repair quantity to remove.")
+            return
+        if r > self.state.get("count_poc_repair", 0):
+            messagebox.showwarning("Too Many", "Cannot remove more POC Repair than recorded.")
+            return
+        self.state["output"] -= r
+        self.state["weighted_output"] -= UNIT_POINTS["POC"]["Repair"] * r
+        self.state["count_poc_repair"] -= r
+        if self.state["output"] == 0:
+            self.state["weighted_output"] = 0.0
+        save_progress(self.state)
+        self._refresh_totals()
+        messagebox.showinfo("Removed", f"Removed {r} POC Repair unit(s).")
+
     # ---- breakdown tab ----
     def _build_breakdown_tab(self, parent):
         parent.columnconfigure(0, weight=1)
         parent.columnconfigure(1, weight=1)
+        parent.columnconfigure(2, weight=1)
         grid = ttk.Frame(parent)
         grid.grid(row=0, column=0, sticky="nw")
+        grid2 = ttk.Frame(parent)
+        grid2.grid(row=0, column=1, sticky="nw", padx=(16,0))
         table_frame = ttk.Frame(parent)
-        table_frame.grid(row=0, column=1, sticky="ne", padx=(16,0))
+        table_frame.grid(row=0, column=2, sticky="ne", padx=(16,0))
 
         self.bd_labels = {}
         self.bd_title_vars = {}
@@ -745,6 +1314,130 @@ class WeightedOutputApp(tk.Tk):
         # Right-side table: points structure
         self._build_points_table(table_frame)
 
+        # Perfecto 2V total (bold)
+        title_perfecto = tk.StringVar(value="Perfecto 2V:")
+        ttk.Label(grid2, textvariable=title_perfecto, font=self.bold_font).grid(row=0, column=0, sticky="w", pady=(8,2))
+        var_perfecto_total = tk.StringVar()
+        ttk.Label(grid2, textvariable=var_perfecto_total, font=self.bold_font).grid(row=0, column=1, sticky="w")
+        self.bd_labels["count_perfecto_total"] = var_perfecto_total
+        self.bd_title_vars["title_perfecto"] = title_perfecto
+        r2 = 1
+        for title, key, tkey in [
+            ("Perfecto 2V QM Warranty", "count_perfecto_qm", "title_perfecto_qm"),
+            ("Perfecto 2V Flat Rate", "count_perfecto_flat", "title_perfecto_flat"),
+            ("Perfecto 2V Manufacture Warranty", "count_perfecto_manuf", "title_perfecto_manuf"),
+        ]:
+            tvar = tk.StringVar(value=f"{title}:")
+            ttk.Label(grid2, textvariable=tvar).grid(row=r2, column=0, sticky="w", pady=2)
+            var = tk.StringVar()
+            ttk.Label(grid2, textvariable=var).grid(row=r2, column=1, sticky="w")
+            self.bd_labels[key] = var
+            self.bd_title_vars[tkey] = tvar
+            r2 += 1
+
+        # M10 total (bold)
+        title_m10 = tk.StringVar(value="M10:")
+        ttk.Label(grid2, textvariable=title_m10, font=self.bold_font).grid(row=r2, column=0, sticky="w", pady=(8,2))
+        var_m10_total = tk.StringVar()
+        ttk.Label(grid2, textvariable=var_m10_total, font=self.bold_font).grid(row=r2, column=1, sticky="w")
+        self.bd_labels["count_m10_total"] = var_m10_total
+        self.bd_title_vars["title_m10"] = title_m10
+        r2 += 1
+        for title, key, tkey in [
+            ("M10 QM Warranty", "count_m10_qm", "title_m10_qm"),
+            ("M10 Flat Rate", "count_m10_flat", "title_m10_flat"),
+            ("M10 Manufacture Warranty", "count_m10_manuf", "title_m10_manuf"),
+        ]:
+            tvar = tk.StringVar(value=f"{title}:")
+            ttk.Label(grid2, textvariable=tvar).grid(row=r2, column=0, sticky="w", pady=2)
+            var = tk.StringVar()
+            ttk.Label(grid2, textvariable=var).grid(row=r2, column=1, sticky="w")
+            self.bd_labels[key] = var
+            self.bd_title_vars[tkey] = tvar
+            r2 += 1
+
+        # Rhythm LM5A total (bold)
+        title_lm5a = tk.StringVar(value="Rhythm LM5A:")
+        ttk.Label(grid2, textvariable=title_lm5a, font=self.bold_font).grid(row=r2, column=0, sticky="w", pady=(8,2))
+        var_lm5a_total = tk.StringVar()
+        ttk.Label(grid2, textvariable=var_lm5a_total, font=self.bold_font).grid(row=r2, column=1, sticky="w")
+        self.bd_labels["count_lm5a_total"] = var_lm5a_total
+        self.bd_title_vars["title_lm5a"] = title_lm5a
+        r2 += 1
+        for title, key, tkey in [
+            ("Rhythm LM5A QM Warranty", "count_lm5a_qm", "title_lm5a_qm"),
+            ("Rhythm LM5A Flat Rate", "count_lm5a_flat", "title_lm5a_flat"),
+            ("Rhythm LM5A Manufacture Warranty", "count_lm5a_manuf", "title_lm5a_manuf"),
+        ]:
+            tvar = tk.StringVar(value=f"{title}:")
+            ttk.Label(grid2, textvariable=tvar).grid(row=r2, column=0, sticky="w", pady=2)
+            var = tk.StringVar()
+            ttk.Label(grid2, textvariable=var).grid(row=r2, column=1, sticky="w")
+            self.bd_labels[key] = var
+            self.bd_title_vars[tkey] = tvar
+            r2 += 1
+
+        # Rhythm LM5BA total (bold)
+        title_lm5ba = tk.StringVar(value="Rhythm LM5BA:")
+        ttk.Label(grid2, textvariable=title_lm5ba, font=self.bold_font).grid(row=r2, column=0, sticky="w", pady=(8,2))
+        var_lm5ba_total = tk.StringVar()
+        ttk.Label(grid2, textvariable=var_lm5ba_total, font=self.bold_font).grid(row=r2, column=1, sticky="w")
+        self.bd_labels["count_lm5ba_total"] = var_lm5ba_total
+        self.bd_title_vars["title_lm5ba"] = title_lm5ba
+        r2 += 1
+        for title, key, tkey in [
+            ("Rhythm LM5BA QM Warranty", "count_lm5ba_qm", "title_lm5ba_qm"),
+            ("Rhythm LM5BA Flat Rate", "count_lm5ba_flat", "title_lm5ba_flat"),
+            ("Rhythm LM5BA Manufacture Warranty", "count_lm5ba_manuf", "title_lm5ba_manuf"),
+        ]:
+            tvar = tk.StringVar(value=f"{title}:")
+            ttk.Label(grid2, textvariable=tvar).grid(row=r2, column=0, sticky="w", pady=2)
+            var = tk.StringVar()
+            ttk.Label(grid2, textvariable=var).grid(row=r2, column=1, sticky="w")
+            self.bd_labels[key] = var
+            self.bd_title_vars[tkey] = tvar
+            r2 += 1
+
+        # Rhythm LM5CA total (bold)
+        title_lm5ca = tk.StringVar(value="Rhythm LM5CA:")
+        ttk.Label(grid2, textvariable=title_lm5ca, font=self.bold_font).grid(row=r2, column=0, sticky="w", pady=(8,2))
+        var_lm5ca_total = tk.StringVar()
+        ttk.Label(grid2, textvariable=var_lm5ca_total, font=self.bold_font).grid(row=r2, column=1, sticky="w")
+        self.bd_labels["count_lm5ca_total"] = var_lm5ca_total
+        self.bd_title_vars["title_lm5ca"] = title_lm5ca
+        r2 += 1
+        for title, key, tkey in [
+            ("Rhythm LM5CA QM Warranty", "count_lm5ca_qm", "title_lm5ca_qm"),
+            ("Rhythm LM5CA Flat Rate", "count_lm5ca_flat", "title_lm5ca_flat"),
+            ("Rhythm LM5CA Manufacture Warranty", "count_lm5ca_manuf", "title_lm5ca_manuf"),
+        ]:
+            tvar = tk.StringVar(value=f"{title}:")
+            ttk.Label(grid2, textvariable=tvar).grid(row=r2, column=0, sticky="w", pady=2)
+            var = tk.StringVar()
+            ttk.Label(grid2, textvariable=var).grid(row=r2, column=1, sticky="w")
+            self.bd_labels[key] = var
+            self.bd_title_vars[tkey] = tvar
+            r2 += 1
+
+        # POC total (bold)
+        title_poc = tk.StringVar(value="POC:")
+        ttk.Label(grid2, textvariable=title_poc, font=self.bold_font).grid(row=r2, column=0, sticky="w", pady=(8,2))
+        var_poc_total = tk.StringVar()
+        ttk.Label(grid2, textvariable=var_poc_total, font=self.bold_font).grid(row=r2, column=1, sticky="w")
+        self.bd_labels["count_poc_total"] = var_poc_total
+        self.bd_title_vars["title_poc"] = title_poc
+        r2 += 1
+        # POC subcategory
+        tvar = tk.StringVar(value="POC Repair:")
+        ttk.Label(grid2, textvariable=tvar).grid(row=r2, column=0, sticky="w", pady=2)
+        var = tk.StringVar()
+        ttk.Label(grid2, textvariable=var).grid(row=r2, column=1, sticky="w")
+        self.bd_labels["count_poc_repair"] = var
+        self.bd_title_vars["title_poc_repair"] = tvar
+        r2 += 1
+
+        # No dynamic flow needed here; content already split into two columns with table separate
+
         self._refresh_breakdown()
 
     def _refresh_breakdown(self):
@@ -825,6 +1518,118 @@ class WeightedOutputApp(tk.Tk):
         self.bd_title_vars["title_1025_flat"].set(f"1025 Flat Rate ({DEV_POINTS['Flat Rate'] * f10:.2f} pts):")
         self.bd_title_vars["title_1025_manuf"].set(f"1025 Manufacture Warranty ({DEV_POINTS['Manufacture Warranty'] * w10:.2f} pts):")
 
+        # Perfecto 2V
+        perf_qm = self.state.get("count_perfecto_qm", 0)
+        perf_flat = self.state.get("count_perfecto_flat", 0)
+        perf_manuf = self.state.get("count_perfecto_manuf", 0)
+        perf_total = perf_qm + perf_flat + perf_manuf
+        if "count_perfecto_total" not in self.bd_labels:
+            # Build section lazily if not present
+            pass
+        else:
+            self.bd_labels["count_perfecto_total"].set(str(perf_total))
+            self.bd_labels["count_perfecto_qm"].set(str(perf_qm))
+            self.bd_labels["count_perfecto_flat"].set(str(perf_flat))
+            self.bd_labels["count_perfecto_manuf"].set(str(perf_manuf))
+            pts = (
+                UNIT_POINTS["Perfecto 2V"]["QM Warranty"] * perf_qm
+                + UNIT_POINTS["Perfecto 2V"]["Flat Rate"] * perf_flat
+                + UNIT_POINTS["Perfecto 2V"]["Manufacture Warranty"] * perf_manuf
+            )
+            self.bd_title_vars["title_perfecto"].set(f"Perfecto 2V ({pts:.2f} pts):")
+            self.bd_title_vars["title_perfecto_qm"].set(f"Perfecto 2V QM Warranty ({UNIT_POINTS['Perfecto 2V']['QM Warranty'] * perf_qm:.2f} pts):")
+            self.bd_title_vars["title_perfecto_flat"].set(f"Perfecto 2V Flat Rate ({UNIT_POINTS['Perfecto 2V']['Flat Rate'] * perf_flat:.2f} pts):")
+            self.bd_title_vars["title_perfecto_manuf"].set(f"Perfecto 2V Manufacture Warranty ({UNIT_POINTS['Perfecto 2V']['Manufacture Warranty'] * perf_manuf:.2f} pts):")
+
+        # M10
+        m10_qm = self.state.get("count_m10_qm", 0)
+        m10_flat = self.state.get("count_m10_flat", 0)
+        m10_manuf = self.state.get("count_m10_manuf", 0)
+        m10_total = m10_qm + m10_flat + m10_manuf
+        if "count_m10_total" in self.bd_labels:
+            self.bd_labels["count_m10_total"].set(str(m10_total))
+            self.bd_labels["count_m10_qm"].set(str(m10_qm))
+            self.bd_labels["count_m10_flat"].set(str(m10_flat))
+            self.bd_labels["count_m10_manuf"].set(str(m10_manuf))
+            pts = (
+                UNIT_POINTS["M10"]["QM Warranty"] * m10_qm
+                + UNIT_POINTS["M10"]["Flat Rate"] * m10_flat
+                + UNIT_POINTS["M10"]["Manufacture Warranty"] * m10_manuf
+            )
+            self.bd_title_vars["title_m10"].set(f"M10 ({pts:.2f} pts):")
+            self.bd_title_vars["title_m10_qm"].set(f"M10 QM Warranty ({UNIT_POINTS['M10']['QM Warranty'] * m10_qm:.2f} pts):")
+            self.bd_title_vars["title_m10_flat"].set(f"M10 Flat Rate ({UNIT_POINTS['M10']['Flat Rate'] * m10_flat:.2f} pts):")
+            self.bd_title_vars["title_m10_manuf"].set(f"M10 Manufacture Warranty ({UNIT_POINTS['M10']['Manufacture Warranty'] * m10_manuf:.2f} pts):")
+
+        # Rhythm LM5A
+        a_qm = self.state.get("count_lm5a_qm", 0)
+        a_flat = self.state.get("count_lm5a_flat", 0)
+        a_manuf = self.state.get("count_lm5a_manuf", 0)
+        a_total = a_qm + a_flat + a_manuf
+        if "count_lm5a_total" in self.bd_labels:
+            self.bd_labels["count_lm5a_total"].set(str(a_total))
+            self.bd_labels["count_lm5a_qm"].set(str(a_qm))
+            self.bd_labels["count_lm5a_flat"].set(str(a_flat))
+            self.bd_labels["count_lm5a_manuf"].set(str(a_manuf))
+            pts = (
+                UNIT_POINTS["Rhythm LM5A"]["QM Warranty"] * a_qm
+                + UNIT_POINTS["Rhythm LM5A"]["Flat Rate"] * a_flat
+                + UNIT_POINTS["Rhythm LM5A"]["Manufacture Warranty"] * a_manuf
+            )
+            self.bd_title_vars["title_lm5a"].set(f"Rhythm LM5A ({pts:.2f} pts):")
+            self.bd_title_vars["title_lm5a_qm"].set(f"Rhythm LM5A QM Warranty ({UNIT_POINTS['Rhythm LM5A']['QM Warranty'] * a_qm:.2f} pts):")
+            self.bd_title_vars["title_lm5a_flat"].set(f"Rhythm LM5A Flat Rate ({UNIT_POINTS['Rhythm LM5A']['Flat Rate'] * a_flat:.2f} pts):")
+            self.bd_title_vars["title_lm5a_manuf"].set(f"Rhythm LM5A Manufacture Warranty ({UNIT_POINTS['Rhythm LM5A']['Manufacture Warranty'] * a_manuf:.2f} pts):")
+
+        # Rhythm LM5BA
+        b_qm = self.state.get("count_lm5ba_qm", 0)
+        b_flat = self.state.get("count_lm5ba_flat", 0)
+        b_manuf = self.state.get("count_lm5ba_manuf", 0)
+        b_total = b_qm + b_flat + b_manuf
+        if "count_lm5ba_total" in self.bd_labels:
+            self.bd_labels["count_lm5ba_total"].set(str(b_total))
+            self.bd_labels["count_lm5ba_qm"].set(str(b_qm))
+            self.bd_labels["count_lm5ba_flat"].set(str(b_flat))
+            self.bd_labels["count_lm5ba_manuf"].set(str(b_manuf))
+            pts = (
+                UNIT_POINTS["Rhythm LM5BA"]["QM Warranty"] * b_qm
+                + UNIT_POINTS["Rhythm LM5BA"]["Flat Rate"] * b_flat
+                + UNIT_POINTS["Rhythm LM5BA"]["Manufacture Warranty"] * b_manuf
+            )
+            self.bd_title_vars["title_lm5ba"].set(f"Rhythm LM5BA ({pts:.2f} pts):")
+            self.bd_title_vars["title_lm5ba_qm"].set(f"Rhythm LM5BA QM Warranty ({UNIT_POINTS['Rhythm LM5BA']['QM Warranty'] * b_qm:.2f} pts):")
+            self.bd_title_vars["title_lm5ba_flat"].set(f"Rhythm LM5BA Flat Rate ({UNIT_POINTS['Rhythm LM5BA']['Flat Rate'] * b_flat:.2f} pts):")
+            self.bd_title_vars["title_lm5ba_manuf"].set(f"Rhythm LM5BA Manufacture Warranty ({UNIT_POINTS['Rhythm LM5BA']['Manufacture Warranty'] * b_manuf:.2f} pts):")
+
+        # Rhythm LM5CA
+        c_qm = self.state.get("count_lm5ca_qm", 0)
+        c_flat = self.state.get("count_lm5ca_flat", 0)
+        c_manuf = self.state.get("count_lm5ca_manuf", 0)
+        c_total = c_qm + c_flat + c_manuf
+        if "count_lm5ca_total" in self.bd_labels:
+            self.bd_labels["count_lm5ca_total"].set(str(c_total))
+            self.bd_labels["count_lm5ca_qm"].set(str(c_qm))
+            self.bd_labels["count_lm5ca_flat"].set(str(c_flat))
+            self.bd_labels["count_lm5ca_manuf"].set(str(c_manuf))
+            pts = (
+                UNIT_POINTS["Rhythm LM5CA"]["QM Warranty"] * c_qm
+                + UNIT_POINTS["Rhythm LM5CA"]["Flat Rate"] * c_flat
+                + UNIT_POINTS["Rhythm LM5CA"]["Manufacture Warranty"] * c_manuf
+            )
+            self.bd_title_vars["title_lm5ca"].set(f"Rhythm LM5CA ({pts:.2f} pts):")
+            self.bd_title_vars["title_lm5ca_qm"].set(f"Rhythm LM5CA QM Warranty ({UNIT_POINTS['Rhythm LM5CA']['QM Warranty'] * c_qm:.2f} pts):")
+            self.bd_title_vars["title_lm5ca_flat"].set(f"Rhythm LM5CA Flat Rate ({UNIT_POINTS['Rhythm LM5CA']['Flat Rate'] * c_flat:.2f} pts):")
+            self.bd_title_vars["title_lm5ca_manuf"].set(f"Rhythm LM5CA Manufacture Warranty ({UNIT_POINTS['Rhythm LM5CA']['Manufacture Warranty'] * c_manuf:.2f} pts):")
+
+        # POC
+        poc_repair = self.state.get("count_poc_repair", 0)
+        if "count_poc_total" in self.bd_labels:
+            self.bd_labels["count_poc_total"].set(str(poc_repair))
+            self.bd_labels["count_poc_repair"].set(str(poc_repair))
+            pts = UNIT_POINTS["POC"]["Repair"] * poc_repair
+            self.bd_title_vars["title_poc"].set(f"POC ({pts:.2f} pts):")
+            self.bd_title_vars["title_poc_repair"].set(f"POC Repair ({pts:.2f} pts):")
+
     def _build_points_table(self, parent):
         cols = ("Unit", "Warranty", "Pts/unit")
         tree = ttk.Treeview(parent, columns=cols, show="headings", height=18)
@@ -851,6 +1656,22 @@ class WeightedOutputApp(tk.Tk):
             ("1025", "Minor Repair", f"{DEV_POINTS['Minor Repair']:.2f}"),
             ("1025", "Flat Rate", f"{DEV_POINTS['Flat Rate']:.2f}"),
             ("1025", "Manufacture Warranty", f"{DEV_POINTS['Manufacture Warranty']:.2f}"),
+            ("Perfecto 2V", "QM Warranty", f"{UNIT_POINTS['Perfecto 2V']['QM Warranty']:.2f}"),
+            ("Perfecto 2V", "Flat Rate", f"{UNIT_POINTS['Perfecto 2V']['Flat Rate']:.2f}"),
+            ("Perfecto 2V", "Manufacture Warranty", f"{UNIT_POINTS['Perfecto 2V']['Manufacture Warranty']:.2f}"),
+            ("M10", "QM Warranty", f"{UNIT_POINTS['M10']['QM Warranty']:.2f}"),
+            ("M10", "Flat Rate", f"{UNIT_POINTS['M10']['Flat Rate']:.2f}"),
+            ("M10", "Manufacture Warranty", f"{UNIT_POINTS['M10']['Manufacture Warranty']:.2f}"),
+            ("Rhythm LM5A", "QM Warranty", f"{UNIT_POINTS['Rhythm LM5A']['QM Warranty']:.2f}"),
+            ("Rhythm LM5A", "Flat Rate", f"{UNIT_POINTS['Rhythm LM5A']['Flat Rate']:.2f}"),
+            ("Rhythm LM5A", "Manufacture Warranty", f"{UNIT_POINTS['Rhythm LM5A']['Manufacture Warranty']:.2f}"),
+            ("Rhythm LM5BA", "QM Warranty", f"{UNIT_POINTS['Rhythm LM5BA']['QM Warranty']:.2f}"),
+            ("Rhythm LM5BA", "Flat Rate", f"{UNIT_POINTS['Rhythm LM5BA']['Flat Rate']:.2f}"),
+            ("Rhythm LM5BA", "Manufacture Warranty", f"{UNIT_POINTS['Rhythm LM5BA']['Manufacture Warranty']:.2f}"),
+            ("Rhythm LM5CA", "QM Warranty", f"{UNIT_POINTS['Rhythm LM5CA']['QM Warranty']:.2f}"),
+            ("Rhythm LM5CA", "Flat Rate", f"{UNIT_POINTS['Rhythm LM5CA']['Flat Rate']:.2f}"),
+            ("Rhythm LM5CA", "Manufacture Warranty", f"{UNIT_POINTS['Rhythm LM5CA']['Manufacture Warranty']:.2f}"),
+            ("POC", "Repair", f"{UNIT_POINTS['POC']['Repair']:.2f}"),
         ]
         for r in rows:
             tree.insert("", "end", values=r)
@@ -883,6 +1704,22 @@ class WeightedOutputApp(tk.Tk):
             ("1025 Minor Repair", "count_1025_minor"),
             ("1025 Flat Rate", "count_1025_flat"),
             ("1025 Manufacture Warranty", "count_1025_manuf"),
+            ("Perfecto 2V QM Warranty", "count_perfecto_qm"),
+            ("Perfecto 2V Flat Rate", "count_perfecto_flat"),
+            ("Perfecto 2V Manufacture Warranty", "count_perfecto_manuf"),
+            ("M10 QM Warranty", "count_m10_qm"),
+            ("M10 Flat Rate", "count_m10_flat"),
+            ("M10 Manufacture Warranty", "count_m10_manuf"),
+            ("Rhythm LM5A QM Warranty", "count_lm5a_qm"),
+            ("Rhythm LM5A Flat Rate", "count_lm5a_flat"),
+            ("Rhythm LM5A Manufacture Warranty", "count_lm5a_manuf"),
+            ("Rhythm LM5BA QM Warranty", "count_lm5ba_qm"),
+            ("Rhythm LM5BA Flat Rate", "count_lm5ba_flat"),
+            ("Rhythm LM5BA Manufacture Warranty", "count_lm5ba_manuf"),
+            ("Rhythm LM5CA QM Warranty", "count_lm5ca_qm"),
+            ("Rhythm LM5CA Flat Rate", "count_lm5ca_flat"),
+            ("Rhythm LM5CA Manufacture Warranty", "count_lm5ca_manuf"),
+            ("POC Repair", "count_poc_repair"),
         ]
         for i, (label, key) in enumerate(fields, start=1):
             ttk.Label(win, text=label+":").grid(row=i, column=0, sticky="w")
@@ -910,15 +1747,39 @@ class WeightedOutputApp(tk.Tk):
                 m10 = int(entries["count_1025_minor"].get().strip())
                 f10 = int(entries["count_1025_flat"].get().strip())
                 w10 = int(entries["count_1025_manuf"].get().strip())
+                perf_qm = int(entries["count_perfecto_qm"].get().strip())
+                perf_flat = int(entries["count_perfecto_flat"].get().strip())
+                perf_manuf = int(entries["count_perfecto_manuf"].get().strip())
+                mm_qm = int(entries["count_m10_qm"].get().strip())
+                mm_flat = int(entries["count_m10_flat"].get().strip())
+                mm_manuf = int(entries["count_m10_manuf"].get().strip())
+                a_qm = int(entries["count_lm5a_qm"].get().strip())
+                a_flat = int(entries["count_lm5a_flat"].get().strip())
+                a_manuf = int(entries["count_lm5a_manuf"].get().strip())
+                b_qm = int(entries["count_lm5ba_qm"].get().strip())
+                b_flat = int(entries["count_lm5ba_flat"].get().strip())
+                b_manuf = int(entries["count_lm5ba_manuf"].get().strip())
+                c_qm = int(entries["count_lm5ca_qm"].get().strip())
+                c_flat = int(entries["count_lm5ca_flat"].get().strip())
+                c_manuf = int(entries["count_lm5ca_manuf"].get().strip())
+                poc_r = int(entries["count_poc_repair"].get().strip())
             except Exception:
                 messagebox.showerror("Invalid", "All fields must be integers.")
                 return
-            if any(x < 0 for x in (s_flat,s_manuf,h_flat,h_manuf,q,p,m,f,w,q10,p10,m10,f10,w10)):
+            if any(x < 0 for x in (s_flat,s_manuf,h_flat,h_manuf,q,p,m,f,w,q10,p10,m10,f10,w10,
+                                    perf_qm,perf_flat,perf_manuf,mm_qm,mm_flat,mm_manuf,
+                                    a_qm,a_flat,a_manuf,b_qm,b_flat,b_manuf,c_qm,c_flat,c_manuf,poc_r)):
                 messagebox.showerror("Invalid", "Values must be non-negative.")
                 return
             s = s_flat + s_manuf
             h = h_flat + h_manuf
-            ssum = s + h + q + p + m + f + w + q10 + p10 + m10 + f10 + w10
+            ssum = s + h + q + p + m + f + w + q10 + p10 + m10 + f10 + w10 
+            ssum += perf_qm + perf_flat + perf_manuf 
+            ssum += mm_qm + mm_flat + mm_manuf 
+            ssum += a_qm + a_flat + a_manuf 
+            ssum += b_qm + b_flat + b_manuf 
+            ssum += c_qm + c_flat + c_manuf 
+            ssum += poc_r
             if ssum != total:
                 messagebox.showerror("Sum Mismatch", f"Sum of entries ({ssum}) must equal total output ({total}).")
                 return
@@ -939,6 +1800,22 @@ class WeightedOutputApp(tk.Tk):
             self.state["count_1025_minor"] = m10
             self.state["count_1025_flat"] = f10
             self.state["count_1025_manuf"] = w10
+            self.state["count_perfecto_qm"] = perf_qm
+            self.state["count_perfecto_flat"] = perf_flat
+            self.state["count_perfecto_manuf"] = perf_manuf
+            self.state["count_m10_qm"] = mm_qm
+            self.state["count_m10_flat"] = mm_flat
+            self.state["count_m10_manuf"] = mm_manuf
+            self.state["count_lm5a_qm"] = a_qm
+            self.state["count_lm5a_flat"] = a_flat
+            self.state["count_lm5a_manuf"] = a_manuf
+            self.state["count_lm5ba_qm"] = b_qm
+            self.state["count_lm5ba_flat"] = b_flat
+            self.state["count_lm5ba_manuf"] = b_manuf
+            self.state["count_lm5ca_qm"] = c_qm
+            self.state["count_lm5ca_flat"] = c_flat
+            self.state["count_lm5ca_manuf"] = c_manuf
+            self.state["count_poc_repair"] = poc_r
             self.state["weighted_output"] = (
                 STRATUS_POINTS * s
                 + HOMEFILL_POINTS * h
@@ -952,6 +1829,22 @@ class WeightedOutputApp(tk.Tk):
                 + DEV_POINTS["Minor Repair"] * m10
                 + DEV_POINTS["Flat Rate"] * f10
                 + DEV_POINTS["Manufacture Warranty"] * w10
+                + UNIT_POINTS["Perfecto 2V"]["QM Warranty"] * perf_qm
+                + UNIT_POINTS["Perfecto 2V"]["Flat Rate"] * perf_flat
+                + UNIT_POINTS["Perfecto 2V"]["Manufacture Warranty"] * perf_manuf
+                + UNIT_POINTS["M10"]["QM Warranty"] * mm_qm
+                + UNIT_POINTS["M10"]["Flat Rate"] * mm_flat
+                + UNIT_POINTS["M10"]["Manufacture Warranty"] * mm_manuf
+                + UNIT_POINTS["Rhythm LM5A"]["QM Warranty"] * a_qm
+                + UNIT_POINTS["Rhythm LM5A"]["Flat Rate"] * a_flat
+                + UNIT_POINTS["Rhythm LM5A"]["Manufacture Warranty"] * a_manuf
+                + UNIT_POINTS["Rhythm LM5BA"]["QM Warranty"] * b_qm
+                + UNIT_POINTS["Rhythm LM5BA"]["Flat Rate"] * b_flat
+                + UNIT_POINTS["Rhythm LM5BA"]["Manufacture Warranty"] * b_manuf
+                + UNIT_POINTS["Rhythm LM5CA"]["QM Warranty"] * c_qm
+                + UNIT_POINTS["Rhythm LM5CA"]["Flat Rate"] * c_flat
+                + UNIT_POINTS["Rhythm LM5CA"]["Manufacture Warranty"] * c_manuf
+                + UNIT_POINTS["POC"]["Repair"] * poc_r
             )
             save_progress(self.state)
             self._refresh_totals()
@@ -961,6 +1854,31 @@ class WeightedOutputApp(tk.Tk):
         btns.grid(row=len(fields)+2, column=0, columnspan=2, pady=(6,8))
         ttk.Button(btns, text="Save", command=on_save).grid(row=0, column=0, padx=(0,8))
         ttk.Button(btns, text="Cancel", command=win.destroy).grid(row=0, column=1)
+
+    # ---- layout helpers ----
+    def _flow_layout(self, parent, frames, columns=2, margin_ratio=0.9):
+        try:
+            self.update_idletasks()
+            max_h = parent.winfo_height()
+            if max_h <= 1:
+                max_h = int(self.winfo_screenheight() * 0.5)
+            for fr in frames:
+                fr.grid_forget()
+            col = 0
+            row_idx = [0] * columns
+            col_heights = [0] * columns
+            for fr in frames:
+                h = fr.winfo_reqheight() + 10  # rough padding
+                if col_heights[col] + h > max_h * margin_ratio and col < columns - 1:
+                    col += 1
+                fr.grid(row=row_idx[col], column=col, sticky="ew", pady=(10, 0))
+                row_idx[col] += 1
+                col_heights[col] += h
+            for c in range(columns):
+                parent.columnconfigure(c, weight=1)
+        except Exception:
+            # Best-effort; ignore layout errors
+            pass
 
     # ---- parsing helpers ----
     def _parse_nonneg(self, var: tk.StringVar) -> int:

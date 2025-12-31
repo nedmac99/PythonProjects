@@ -1,4 +1,4 @@
-('c:\\Users\\GATech\\Desktop\\PythonProjects\\weighted_output_tracker\\build\\WeightedOutputTracker\\PYZ-00.pyz',
+('C:\\Users\\GATech\\Desktop\\PythonProjects\\weighted_output_tracker\\build\\WeightedOutputTracker\\PYZ-00.pyz',
  [('__future__',
    'C:\\Users\\GATech\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\__future__.py',
    'PYMODULE'),

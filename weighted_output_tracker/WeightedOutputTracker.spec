@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['weight_output_gui.py'],
+    ['C:\\Users\\GATech\\Desktop\\PythonProjects\\weighted_output_tracker\\weight_output_gui.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -35,5 +35,4 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['money-bag-32.ico'],
 )
