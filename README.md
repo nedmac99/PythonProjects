@@ -184,37 +184,6 @@ python weight_output_gui.py
 
 ---
 
-## 🛒 E-Commerce
-
-**Location:** `ecommerce/`
-
-A Django-based e-commerce web application prototype.
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Python 3.8+
-- pip
-
-### Installation
-```bash
-# Clone the repository
-git clone https://github.com/nedmac99/PythonProjects.git
-cd PythonProjects
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies for a specific project
-cd <project_folder>
-pip install -r requirements.txt
-```
-
----
-
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
