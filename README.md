@@ -20,7 +20,6 @@ A comprehensive collection of Python projects demonstrating proficiency in **Mac
 | [👤 facial_recognition](#-facial-recognition) | Real-time face detection & identification | TensorFlow, DeepFace, OpenCV |
 | [🏥 o2_inventory](#-oxygen-concentrator-inventory-system) | Healthcare inventory management | OOP, CSV, Unit Testing |
 | [⚖️ weighted_output_tracker](#%EF%B8%8F-weighted-output-tracker) | Productivity tracking desktop app | Tkinter, PyInstaller |
-| [🛒 ecommerce](#-ecommerce) | E-commerce web application | Django |
 
 ---
 
