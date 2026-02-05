@@ -1,6 +1,6 @@
 # 🐍 Python Projects Portfolio
 
-A comprehensive collection of Python projects demonstrating proficiency in **Machine Learning**, **Data Science**, **Computer Vision**, **Web Development**, and **Desktop Application Development**.
+A comprehensive collection of Python projects demonstrating proficiency in **Machine Learning**, **Data Science**, **Computer Vision**, and **Web Development**.
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange?logo=scikit-learn&logoColor=white)
@@ -19,7 +19,6 @@ A comprehensive collection of Python projects demonstrating proficiency in **Mac
 | [📈 stock_market_dashboard](#-stock-market-dashboard) | Real-time stock analytics | Streamlit, yFinance, Plotly |
 | [👤 facial_recognition](#-facial-recognition) | Real-time face detection & identification | TensorFlow, DeepFace, OpenCV |
 | [🏥 o2_inventory](#-oxygen-concentrator-inventory-system) | Healthcare inventory management | OOP, CSV, Unit Testing |
-| [⚖️ weighted_output_tracker](#%EF%B8%8F-weighted-output-tracker) | Productivity tracking desktop app | Tkinter, PyInstaller |
 
 ---
 
@@ -153,32 +152,6 @@ Concentrator (Base)
 ```bash
 cd o2_inventory
 python o2_concentrator_inventory_system.py
-```
-
----
-
-## ⚖️ Weighted Output Tracker
-
-**Location:** `weighted_output_tracker/`
-
-A productivity tracking desktop application with both CLI and GUI interfaces.
-
-### Features:
-- 📊 Weighted scoring system for different unit types
-- 🖥️ Tkinter GUI for easy interaction
-- 📁 CSV data persistence
-- 📈 Daily progress tracking
-- 📦 Standalone Windows executable via PyInstaller
-
-### Tech Stack:
-```
-Python | Tkinter | CSV | PyInstaller
-```
-
-### Run Locally:
-```bash
-cd weighted_output_tracker
-python weight_output_gui.py
 ```
 
 ---
